@@ -81,6 +81,9 @@ public class tetroMov : MonoBehaviour
                     transform.position += new Vector3(0, 1, 0);
                     //gManager.apagaLinha();
 
+                    if(gManager.abaixoGrade(this)){
+                        Debug.Log("GAME OVER (down):" + gManager.abaixoGrade(this));
+                        //gManager.gameOver();
                     }
 
                     gManager.score += 10;
@@ -90,6 +93,34 @@ public class tetroMov : MonoBehaviour
                 //queda = Time.time;
             }
 
+            //Tecla para ir para cima
+            if (Input.GetKey(KeyCode.UpArrow)){ //|| Time.time - queda >= 1){
+            timer += Time.deltaTime;
+            if(timer > velocidade){
+                    transform.position += new Vector3(0, 1, 0);
+                    timer = 0;
+            }
+
+                if (posicaoValida()){
+                    gManager.atualizaGrade(this);
+                }
+                else{
+                    transform.position += new Vector3(0, -1, 0);
+                    //gManager.apagaLinha();
+
+                    if(gManager.abaixoGrade(this)){
+                        Debug.Log("GAME OVER (up):" + gManager.abaixoGrade(this));
+                        //gManager.gameOver();
+                    }
+
+                    gManager.score += 10;
+                    enabled = false;
+                    gSpawner.proximaPeca();
+                }
+                //queda = Time.time;
+            }
+
+            //Sobe automatica da peça
             if(Time.time - queda >= 1 && !Input.GetKey(KeyCode.DownArrow)){
                 transform.position += new Vector3(0, 1, 0);
                 if (posicaoValida()){
@@ -99,6 +130,9 @@ public class tetroMov : MonoBehaviour
                     transform.position += new Vector3(0, 1, 0);  
                     //gManager.apagaLinha();
 
+                    if(gManager.abaixoGrade(this)){
+                        Debug.Log("GAME OVER (auto):" + gManager.abaixoGrade(this));
+                        //gManager.gameOver();
                     }
 
                     gManager.score += 10;
@@ -162,14 +196,17 @@ public class tetroMov : MonoBehaviour
 
             if (gManager.dentroGrade(posBloco) == false)
             {
+                Debug.Log("FORA da grade 1");
                 return false;
             } 
 
             if(gManager.posicaoTransformGrade(posBloco) != null && 
                 gManager.posicaoTransformGrade(posBloco).parent != transform){
+                Debug.Log("FORA da grade 2");
                 return false;
             }
         }
+        Debug.Log("DENTRO da grade");
         return true;
     }
 }
