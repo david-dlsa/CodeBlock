@@ -81,8 +81,6 @@ public class tetroMov : MonoBehaviour
                     transform.position += new Vector3(0, 1, 0);
                     //gManager.apagaLinha();
 
-                    if(gManager.acimaGrade(this)){
-                        gManager.gameOver();
                     }
 
                     gManager.score += 10;
@@ -92,7 +90,6 @@ public class tetroMov : MonoBehaviour
                 //queda = Time.time;
             }
 
-            //Queda automatica da peça
             if(Time.time - queda >= 1 && !Input.GetKey(KeyCode.DownArrow)){
                 transform.position += new Vector3(0, 1, 0);
                 if (posicaoValida()){
@@ -102,8 +99,6 @@ public class tetroMov : MonoBehaviour
                     transform.position += new Vector3(0, 1, 0);  
                     //gManager.apagaLinha();
 
-                    if(gManager.acimaGrade(this)){
-                        gManager.gameOver();
                     }
 
                     gManager.score += 10;
@@ -172,7 +167,6 @@ public class tetroMov : MonoBehaviour
 
             if(gManager.posicaoTransformGrade(posBloco) != null && 
                 gManager.posicaoTransformGrade(posBloco).parent != transform){
-                
                 return false;
             }
         }

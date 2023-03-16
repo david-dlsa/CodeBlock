@@ -22,7 +22,6 @@ public class gameManager : MonoBehaviour {
 
     public bool dentroGrade(Vector2 posicao)
     {
-        return ((int)posicao.x >= 0 && (int)posicao.x < largura /*&& (int)posicao.y >= 0*/ && (int)posicao.y < altura);
     }
 
     public Vector2 arredonda(Vector2 nA)
@@ -40,10 +39,9 @@ public class gameManager : MonoBehaviour {
                 }
             }
         }
+        Debug.Log("Peça tetris: "+pecaTetris);
         foreach (Transform peca in pecaTetris.transform){
             Vector2 posicao = arredonda(peca.position);
-
-            if(posicao.y > altura){
                 grade[(int)posicao.x, (int)posicao.y] = peca;
             }
         }
@@ -114,7 +112,6 @@ public class gameManager : MonoBehaviour {
         }
     }
 
-    public bool acimaGrade(tetroMov pecaTetro)
     {
         for (int x = 0; x < largura; x++)
         {
@@ -122,7 +119,6 @@ public class gameManager : MonoBehaviour {
             {
                 Vector2 posicao = arredonda(quadrado.position);
 
-                if (posicao.y > altura - 1)
                 {
                     return true;
                 }
