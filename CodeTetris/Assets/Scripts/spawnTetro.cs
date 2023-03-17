@@ -22,7 +22,7 @@ public class spawnTetro : MonoBehaviour {
     {
         Instantiate(criaPecas[mostraProximaPeca], transform.position, Quaternion.identity);
 
-        mostraProximaPeca = Random.Range(0, 7);
+        mostraProximaPeca = Random.Range(0, 10);
 
         for (int i = 0; i < mostraPecas.Count; i++)
         {

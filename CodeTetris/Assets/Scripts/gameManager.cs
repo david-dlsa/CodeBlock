@@ -23,7 +23,8 @@ public class gameManager : MonoBehaviour {
     //Esta dentro da largura e se é menor que a altura
     public bool dentroGrade(Vector2 posicao)
     {
-        return ((int)posicao.x >= 0 && (int)posicao.x < largura /*&& (int)posicao.y >= 0*/ && (int)posicao.y < altura - 1);
+        Debug.Log("MET dentro_grade -- "+"X:" + (int)posicao.x + " // Y:" + (int)posicao.y + " // " + ((int)posicao.x >= 0 && (int)posicao.x < largura) + ((int)posicao.y < altura - 1));
+        return ((int)posicao.x >= 0 && (int)posicao.x < largura /*&& (int)posicao.y >= 0*/ && (int)posicao.y < altura - 2);
     }
 
     public Vector2 arredonda(Vector2 nA)
@@ -45,7 +46,7 @@ public class gameManager : MonoBehaviour {
         foreach (Transform peca in pecaTetris.transform){
             Vector2 posicao = arredonda(peca.position);
             Debug.Log("posição: "+posicao+" // Peça: "+peca + " // grade antes: "+grade.Length);
-            if(posicao.y < 1){
+            if(posicao.y >= 0 && posicao.y < altura - 1){
                 grade[(int)posicao.x, (int)posicao.y] = peca;
                 Debug.Log("grade DEPOIS: "+grade.Length + "// peça colocada " + grade[(int)posicao.x, (int)posicao.y]);
             }
