@@ -23,8 +23,8 @@ public class gameManager : MonoBehaviour {
     //Esta dentro da largura e se é menor que a altura
     public bool dentroGrade(Vector2 posicao)
     {
-        Debug.Log("MET dentro_grade -- "+"X:" + (int)posicao.x + " // Y:" + (int)posicao.y + " // " + ((int)posicao.x >= 0 && (int)posicao.x < largura) + ((int)posicao.y < altura - 1));
-        return ((int)posicao.x >= 0 && (int)posicao.x < largura /*&& (int)posicao.y >= 0*/ && (int)posicao.y < altura - 2);
+        Debug.Log("MET dentro_grade -- "+"X:" + (int)posicao.x + " // Y:" + (int)posicao.y + " // " + ((int)posicao.x >= 0 && (int)posicao.x < largura) + ((int)posicao.y < altura));
+        return ((int)posicao.x >= 0 && (int)posicao.x < largura /*&& (int)posicao.y >= 0*/ && (int)posicao.y < altura);
     }
 
     public Vector2 arredonda(Vector2 nA)
@@ -33,31 +33,35 @@ public class gameManager : MonoBehaviour {
     }
 
     public void atualizaGrade(tetroMov pecaTetris){
-        for (int y=0; y < altura; y++){
+        for (int y=altura-1; y >= 0; y--){
             for (int x=0; x < largura; x++){
                 if (grade [x,y] != null){
                     if(grade[x,y].parent == pecaTetris.transform){
+                        Debug.Log("Nao Colocar Ainda, ta se movendo pra cima");
                         grade[x,y] = null;
                     }
                 }
             }
         }
-        Debug.Log("Peça tetris: "+pecaTetris);
+        Debug.Log("Peça tetris: "+pecaTetris+" // Tamanho: "+ pecaTetris.transform.childCount);
         foreach (Transform peca in pecaTetris.transform){
             Vector2 posicao = arredonda(peca.position);
             Debug.Log("posição: "+posicao+" // Peça: "+peca + " // grade antes: "+grade.Length);
-            if(posicao.y >= 0 && posicao.y < altura - 1){
+            if(posicao.y >= 0){
+                 Debug.Log("Local da grade antes: " + grade[(int)posicao.x, (int)posicao.y] + " e " + pecaTetris);
                 grade[(int)posicao.x, (int)posicao.y] = peca;
-                Debug.Log("grade DEPOIS: "+grade.Length + "// peça colocada " + grade[(int)posicao.x, (int)posicao.y]);
+                Debug.Log("peça colocada " + grade[(int)posicao.x, (int)posicao.y] + " e " + pecaTetris);
             }
         }
     }
 
+    //Define que o bloco está fixo em determinada posição da
     public Transform posicaoTransformGrade(Vector2 posicao){
-        if(posicao.y < altura - 1){
+        if(posicao.y < 0){
             return null;
         }
         else{
+            Debug.Log("PosX: "+ (int)posicao.x + " // PosY: " + (int)posicao.y);
             return grade[(int)posicao.x, (int)posicao.y];
         }
     }

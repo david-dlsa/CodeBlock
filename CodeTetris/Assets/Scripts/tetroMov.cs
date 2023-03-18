@@ -88,7 +88,6 @@ public class tetroMov : MonoBehaviour
 
                     gManager.score += 10;
                     enabled = false;
-                    gSpawner.proximaPeca();
                 }
                 //queda = Time.time;
             }
@@ -127,7 +126,7 @@ public class tetroMov : MonoBehaviour
                     gManager.atualizaGrade(this);
                 }
                 else{
-                    transform.position += new Vector3(0, 1, 0);  
+                    transform.position += new Vector3(0, -1, 0);  
                     //gManager.apagaLinha();
 
                     if(gManager.abaixoGrade(this)){
