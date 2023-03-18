@@ -45,12 +45,13 @@ public class gameManager : MonoBehaviour {
         }
         Debug.Log("Peça tetris: "+pecaTetris+" // Tamanho: "+ pecaTetris.transform.childCount);
         foreach (Transform peca in pecaTetris.transform){
-            Vector2 posicao = arredonda(peca.position);
-            Debug.Log("posição: "+posicao+" // Peça: "+peca + " // grade antes: "+grade.Length);
-            if(posicao.y >= 0){
-                 Debug.Log("Local da grade antes: " + grade[(int)posicao.x, (int)posicao.y] + " e " + pecaTetris);
-                grade[(int)posicao.x, (int)posicao.y] = peca;
-                Debug.Log("peça colocada " + grade[(int)posicao.x, (int)posicao.y] + " e " + pecaTetris);
+            //Não conta filho de pecaTetris que não esteja com a Tag pecaBloco
+            if(peca.CompareTag("pecaBloco")){
+                Vector2 posicao = arredonda(peca.position);
+                if(posicao.y >= 0){
+                    grade[(int)posicao.x, (int)posicao.y] = peca;
+                    Debug.Log("peça colocada " + grade[(int)posicao.x, (int)posicao.y] + " e " + pecaTetris);
+                }
             }
         }
     }
