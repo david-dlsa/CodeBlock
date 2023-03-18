@@ -14,7 +14,10 @@ public class tetroMov : MonoBehaviour
     public float timer;
 
     Transform child;
-    gameManager gManager;
+    gameManagerGrade gManagerGrade;
+
+    gameController gController;
+
     spawnTetro gSpawner;
 
     // Use this for initialization
@@ -23,14 +26,15 @@ public class tetroMov : MonoBehaviour
         timer = velocidade;
         child = transform.Find("partCode");
 
-        gManager = GameObject.FindObjectOfType<gameManager>();
+        gManagerGrade = GameObject.FindObjectOfType<gameManagerGrade>();
+        gController = GameObject.FindObjectOfType<gameController>();
         gSpawner = GameObject.FindObjectOfType<spawnTetro>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!gManager.pause){
+        if (!gManagerGrade.pause){
             if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.DownArrow))
                 timer = velocidade;
 
@@ -44,7 +48,7 @@ public class tetroMov : MonoBehaviour
                 }
                 
                 if (posicaoValida()){
-                    gManager.atualizaGrade(this);
+                    gManagerGrade.atualizaGrade(this);
                 }
                 else{
                     transform.position += new Vector3(-1, 0, 0);
@@ -60,13 +64,15 @@ public class tetroMov : MonoBehaviour
                 }
 
                 if (posicaoValida()){
-                    gManager.atualizaGrade(this);
+                    gManagerGrade.atualizaGrade(this);
                 }
                 else{
                     transform.position += new Vector3(1, 0, 0);
                 }
             }
-            //Tecla para ir para baixo
+
+            //Tecla para ir para baixo  
+            //TODO TEM QUE SER RETIRADO DEPOIS
             if (Input.GetKey(KeyCode.DownArrow)){ //|| Time.time - queda >= 1){
             timer += Time.deltaTime;
             if(timer > velocidade){
@@ -75,18 +81,18 @@ public class tetroMov : MonoBehaviour
             }
 
                 if (posicaoValida()){
-                    gManager.atualizaGrade(this);
+                    gManagerGrade.atualizaGrade(this);
                 }
                 else{
                     transform.position += new Vector3(0, 1, 0);
-                    //gManager.apagaLinha();
+                    //gManagerGrade.apagaLinha();
 
-                    if(gManager.abaixoGrade(this)){
-                        Debug.Log("GAME OVER (down):" + gManager.abaixoGrade(this));
-                        //gManager.gameOver();
+                    if(gManagerGrade.abaixoGrade(this)){
+                        Debug.Log("GAME OVER (down):" + gManagerGrade.abaixoGrade(this));
+                        gController.ShowGameOver();
                     }
 
-                    gManager.score += 10;
+                    gManagerGrade.score += 10;
                     enabled = false;
                 }
                 //queda = Time.time;
@@ -101,20 +107,21 @@ public class tetroMov : MonoBehaviour
             }
 
                 if (posicaoValida()){
-                    gManager.atualizaGrade(this);
+                    gManagerGrade.atualizaGrade(this);
                 }
                 else{
                     transform.position += new Vector3(0, -1, 0);
-                    //gManager.apagaLinha();
+                    //gManagerGrade.apagaLinha();
 
-                    if(gManager.abaixoGrade(this)){
-                        Debug.Log("GAME OVER (up):" + gManager.abaixoGrade(this));
-                        //gManager.gameOver();
+                    if(gManagerGrade.abaixoGrade(this)){
+                        Debug.Log("GAME OVER (up):" + gManagerGrade.abaixoGrade(this));
+                        gController.ShowGameOver();
                     }
-
-                    gManager.score += 10;
-                    enabled = false;
-                    gSpawner.proximaPeca();
+                    else{
+                        gManagerGrade.score += 10;
+                        enabled = false;
+                        gSpawner.proximaPeca();
+                    }
                 }
                 //queda = Time.time;
             }
@@ -123,20 +130,21 @@ public class tetroMov : MonoBehaviour
             if(Time.time - queda >= 1 && !Input.GetKey(KeyCode.DownArrow)){
                 transform.position += new Vector3(0, 1, 0);
                 if (posicaoValida()){
-                    gManager.atualizaGrade(this);
+                    gManagerGrade.atualizaGrade(this);
                 }
                 else{
                     transform.position += new Vector3(0, -1, 0);  
-                    //gManager.apagaLinha();
+                    //gManagerGrade.apagaLinha();
 
-                    if(gManager.abaixoGrade(this)){
-                        Debug.Log("GAME OVER (auto):" + gManager.abaixoGrade(this));
-                        //gManager.gameOver();
+                    if(gManagerGrade.abaixoGrade(this)){
+                        Debug.Log("GAME OVER (auto):" + gManagerGrade.abaixoGrade(this));
+                        gController.ShowGameOver();
                     }
-
-                    gManager.score += 10;
-                    enabled = false;
-                    gSpawner.proximaPeca();
+                    else{
+                        gManagerGrade.score += 10;
+                        enabled = false;
+                        gSpawner.proximaPeca();
+                    }
                 }
                 queda = Time.time;
             }
@@ -157,7 +165,7 @@ public class tetroMov : MonoBehaviour
                     
                   
                     if (posicaoValida()){
-                        gManager.atualizaGrade(this);
+                        gManagerGrade.atualizaGrade(this);
                     }
                     else{
                         transform.Rotate(0, 0, -90);
@@ -167,7 +175,7 @@ public class tetroMov : MonoBehaviour
                     transform.Rotate(0, 0, -90);
 
                     if (posicaoValida()){
-                        gManager.atualizaGrade(this);
+                        gManagerGrade.atualizaGrade(this);
                     }
                     else{
                         transform.Rotate(0, 0, 90);
@@ -178,7 +186,7 @@ public class tetroMov : MonoBehaviour
                 transform.Rotate(0, 0, -90);
 
                 if (posicaoValida()){
-                    gManager.atualizaGrade(this);
+                    gManagerGrade.atualizaGrade(this);
                 }
                 else{
                     transform.Rotate(0, 0, 90);
@@ -191,16 +199,16 @@ public class tetroMov : MonoBehaviour
     {
         foreach (Transform child in transform)
         {
-            Vector2 posBloco = gManager.arredonda(child.position);
+            Vector2 posBloco = gManagerGrade.arredonda(child.position);
 
-            if (gManager.dentroGrade(posBloco) == false)
+            if (gManagerGrade.dentroGrade(posBloco) == false)
             {
                 Debug.Log("FORA da grade 1");
                 return false;
             } 
 
-            if(gManager.posicaoTransformGrade(posBloco) != null && 
-                gManager.posicaoTransformGrade(posBloco).parent != transform){
+            if(gManagerGrade.posicaoTransformGrade(posBloco) != null && 
+                gManagerGrade.posicaoTransformGrade(posBloco).parent != transform){
                 Debug.Log("FORA da grade 2");
                 return false;
             }

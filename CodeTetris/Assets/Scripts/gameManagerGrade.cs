@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class gameManager : MonoBehaviour {
+public class gameManagerGrade : MonoBehaviour {
 
     public static int altura = 20;
     public static int largura = 12;
@@ -138,11 +138,6 @@ public class gameManager : MonoBehaviour {
             }
         }
         return false;
-    }
-
-    public void gameOver()
-    {
-        SceneManager.LoadScene("gameOver");
     }
 
     public void pausarJogo()

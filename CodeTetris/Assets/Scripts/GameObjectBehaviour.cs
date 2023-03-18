@@ -81,7 +81,7 @@ public class GameObjectBehaviour : MonoBehaviour
     }
     /*
      * retorna se o objeto esta selecionado ou não 
-     Mudar pra protected de volta e arrumar pra chamar no gameManager
+     Mudar pra protected de volta e arrumar pra chamar no Grade
      */
     public bool isSelecionado()
     {
