@@ -12,7 +12,8 @@ public class spawnTetro : MonoBehaviour {
         // Use this for initialization
         void Start () {
 
-        mostraProximaPeca = Random.Range(0, 10);
+        mostraProximaPeca = Random.Range(0, criaPecas.Length);
+        Debug.Log("Tamanho array: "+criaPecas.Length + "Resultado: "+mostraProximaPeca);
         proximaPeca();
     }
         /*TODO 
@@ -20,15 +21,16 @@ public class spawnTetro : MonoBehaviour {
         com os mesmos 7 sem repetir...*/
     public void proximaPeca()
     {
+        Debug.Log("Pos Spawn: "+transform.position);
         Instantiate(criaPecas[mostraProximaPeca], transform.position, Quaternion.identity);
 
-        mostraProximaPeca = Random.Range(0, 10);
+        mostraProximaPeca = Random.Range(0, criaPecas.Length);
+       
+        // for (int i = 0; i < mostraPecas.Count; i++)
+        // {
+        //     mostraPecas[i].SetActive(false);
+        // }
 
-        for (int i = 0; i < mostraPecas.Count; i++)
-        {
-            mostraPecas[i].SetActive(false);
-        }
-
-        mostraPecas[mostraProximaPeca].SetActive(true);
+        // mostraPecas[mostraProximaPeca].SetActive(true);
     }
 }

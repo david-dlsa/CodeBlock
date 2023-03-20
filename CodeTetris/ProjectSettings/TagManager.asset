@@ -6,6 +6,7 @@ TagManager:
   tags:
   - tetromino
   - pecaBloco
+  - partCode
   layers:
   - Default
   - TransparentFX

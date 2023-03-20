@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 4166462936178973622}
   m_Layer: 0
   m_Name: Purple_L
-  m_TagString: pecaBloco
+  m_TagString: partCode
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -894,7 +894,7 @@ GameObject:
   - component: {fileID: 1918926172198887154}
   m_Layer: 0
   m_Name: partCode
-  m_TagString: Untagged
+  m_TagString: partCode
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

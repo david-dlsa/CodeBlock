@@ -111,16 +111,16 @@ public class tetroMov : MonoBehaviour
                 }
                 else{
                     transform.position += new Vector3(0, -1, 0);
-                    //gManagerGrade.apagaLinha();
+                    gManagerGrade.apagaLinha(this);
 
                     if(gManagerGrade.abaixoGrade(this)){
                         Debug.Log("GAME OVER (up):" + gManagerGrade.abaixoGrade(this));
                         gController.ShowGameOver();
                     }
                     else{
-                        gManagerGrade.score += 10;
-                        enabled = false;
-                        gSpawner.proximaPeca();
+                    gManagerGrade.score += 10;
+                    enabled = false;
+                    gSpawner.proximaPeca();
                     }
                 }
                 //queda = Time.time;
@@ -134,16 +134,16 @@ public class tetroMov : MonoBehaviour
                 }
                 else{
                     transform.position += new Vector3(0, -1, 0);  
-                    //gManagerGrade.apagaLinha();
+                    gManagerGrade.apagaLinha(this);
 
                     if(gManagerGrade.abaixoGrade(this)){
                         Debug.Log("GAME OVER (auto):" + gManagerGrade.abaixoGrade(this));
                         gController.ShowGameOver();
                     }
                     else{
-                        gManagerGrade.score += 10;
-                        enabled = false;
-                        gSpawner.proximaPeca();
+                    gManagerGrade.score += 10;
+                    enabled = false;
+                    gSpawner.proximaPeca();
                     }
                 }
                 queda = Time.time;
@@ -213,7 +213,7 @@ public class tetroMov : MonoBehaviour
                 return false;
             }
         }
-        Debug.Log("DENTRO da grade");
+        //Debug.Log("DENTRO da grade");
         return true;
     }
 }

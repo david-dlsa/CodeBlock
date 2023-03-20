@@ -9,14 +9,18 @@ public class gameController : MonoBehaviour
     public int indexScene;
 
     public static gameController instance;
+    gameManagerGrade gManagerGrade;
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
         Time.timeScale = 1;
+
+        gManagerGrade = GameObject.FindObjectOfType<gameManagerGrade>();
     }
 
     public void ShowGameOver(){
+        gManagerGrade.pausarJogo();
         gameOverPanel.SetActive(true);
         Time.timeScale = 0;
     }
