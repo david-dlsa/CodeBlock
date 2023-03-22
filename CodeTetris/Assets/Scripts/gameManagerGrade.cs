@@ -78,18 +78,19 @@ public class gameManagerGrade : MonoBehaviour {
 
     public void deletaQuadrado(int y)
     {
-        // if (y >= 0 && y < altura){
-            for (int x = 0; x < largura; x++)
+        for (int x = 0; x < largura; x++)
+            {
+                if (grade[x, y] != null)
                 {
-                    if (grade[x, y] != null)
-                    {
-                        
-                        Destroy(grade[x, y].transform.parent.gameObject);
-                        grade[x, y] = null;
-                    }
+                    Destroy(grade[x, y].transform.parent.gameObject);
+                    grade[x, y] = null;
                 }
-        //}
-        
+                if (grade[x, (y+1)] != null)
+                {
+                    Destroy(grade[x, (y + 1)].transform.parent.gameObject);
+                    grade[x, (y + 1)] = null;
+                }
+            }
     }
 
     public void moveLinhaCima(int y)
@@ -141,7 +142,7 @@ public class gameManagerGrade : MonoBehaviour {
                 {
                     auxY = y - 1;
                 }
-                deletaQuadrado(y);
+                deletaQuadrado(auxY);
                 moveTodasLinhasCima(auxY - 1);
                 y++;
                 score += 50;
