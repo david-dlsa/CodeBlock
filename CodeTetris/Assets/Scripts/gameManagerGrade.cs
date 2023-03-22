@@ -23,7 +23,6 @@ public class gameManagerGrade : MonoBehaviour {
     //Esta dentro da largura e se é menor que a altura
     public bool dentroGrade(Vector2 posicao)
     {
-        //Debug.Log("MET dentro_grade -- "+"X:" + (int)posicao.x + " // Y:" + (int)posicao.y + " // " + ((int)posicao.x >= 0 && (int)posicao.x < largura) + ((int)posicao.y < altura));
         return ((int)posicao.x >= 0 && (int)posicao.x < largura /*&& (int)posicao.y >= 0*/ && (int)posicao.y < altura);
     }
 
@@ -37,20 +36,18 @@ public class gameManagerGrade : MonoBehaviour {
             for (int x=0; x < largura; x++){
                 if (grade [x,y] != null){
                     if(grade[x,y].parent == pecaTetris.transform){
-                        //Debug.Log("Nao Colocar Ainda, ta se movendo pra cima");
                         grade[x,y] = null;
                     }
                 }
             }
         }
-        //Debug.Log("Peça tetris: "+pecaTetris+" // Tamanho: "+ pecaTetris.transform.childCount);
+        
         foreach (Transform peca in pecaTetris.transform){
             //Não conta filho de pecaTetris que não esteja com a Tag pecaBloco
             if(peca.CompareTag("pecaBloco")){
                 Vector2 posicao = arredonda(peca.position);
                 if(posicao.y >= 0){
                     grade[(int)posicao.x, (int)posicao.y] = peca;
-                    //Debug.Log("peça colocada " + grade[(int)posicao.x, (int)posicao.y] + " e " + pecaTetris);
                 }
             }
         }
@@ -62,7 +59,6 @@ public class gameManagerGrade : MonoBehaviour {
             return null;
         }
         else{
-           // Debug.Log("PosX: "+ (int)posicao.x + " // PosY: " + (int)posicao.y);
             return grade[(int)posicao.x, (int)posicao.y];
         }
     }
@@ -71,7 +67,7 @@ public class gameManagerGrade : MonoBehaviour {
     {
         for (int x = 0; x < largura; x++)
         {
-            Debug.Log("LINHA CHEIA posição X = " + x + " e Y = " + y);
+            
             if (grade[x,y] == null)
             {
                 return false;
@@ -87,7 +83,7 @@ public class gameManagerGrade : MonoBehaviour {
                 {
                     if (grade[x, y] != null)
                     {
-                        Debug.Log("1-Excluindo bloco da posição X = " + x + " e Y = " + y + " // tenho isso na grade: "+grade[x, y]+" isso é oque estou destruindo: "+grade[x, y].transform.parent.gameObject);
+                        
                         Destroy(grade[x, y].transform.parent.gameObject);
                         grade[x, y] = null;
                     }
@@ -96,26 +92,38 @@ public class gameManagerGrade : MonoBehaviour {
         
     }
 
-    public void moveLinhaBaixo(int y)
+    public void moveLinhaCima(int y)
     {
+        string nomeBlocoAnterior = "";
         for (int x = 0; x < largura; x++)
         {
-            if(grade[x,y] != null)
-            {
+            if(grade[x,y] != null){
+                string nomeBlocoAtual = grade[x, y].transform.parent.gameObject.name;
                 //estrutural de como os blocos estão movendo
-                grade[x, y + 1] = grade[x, y];
+                grade[x, y + 2] = grade[x, y];
+                if (nomeBlocoAnterior != nomeBlocoAtual)
+                {
+                    nomeBlocoAnterior = nomeBlocoAtual;
+                    Transform partCode = grade[x, y].transform.parent.gameObject.transform.Find("partCode").transform;
+                    Vector2 newPosition = partCode.position;
+                    newPosition.y = newPosition.y + 1.0f;
+                    partCode.position = newPosition;
+                }
                 grade[x, y] = null;
+
                 //parte visual de movimentar os blocos
-                grade[x, y + 1].position += new Vector3(0, 2, 0);
+                grade[x, y + 2].position += new Vector3(0, 2, 0);
+               
             }
+            
         }
     }
 
-    public void moveTodasLinhasBaixo (int y)
+    public void moveTodasLinhasCima (int y)
     {
         for (int i = y; i >= 0; i--)
         {
-            moveLinhaBaixo(i);
+            moveLinhaCima(i);
         }
     }
 
@@ -123,12 +131,18 @@ public class gameManagerGrade : MonoBehaviour {
     {
         for (int y=altura-1; y >= 0; y--)
         {
-            Debug.Log("Estou na altura "+ y + " e abaixo de mim é " + (y-1));
             if (linhaCheia(y)){
-                Debug.Log("Linha "+ y + " e linha" + (y-1) + "estão cheias");
+                int auxY;
+                if (y%2 == 0)
+                {
+                    auxY = y;
+                }
+                else
+                {
+                    auxY = y - 1;
+                }
                 deletaQuadrado(y);
-                moveTodasLinhasBaixo(y - 1);
-                //moveTodasLinhasBaixo(y - 1); //ver pq + 1
+                moveTodasLinhasCima(auxY - 1);
                 y++;
                 score += 50;
             }

@@ -9,6 +9,9 @@ public class spawnTetro : MonoBehaviour {
     public Transform[] criaPecas;
     public List<GameObject> mostraPecas;
 
+     private int cloneID = 0;
+
+
         // Use this for initialization
         void Start () {
 
@@ -21,8 +24,10 @@ public class spawnTetro : MonoBehaviour {
         com os mesmos 7 sem repetir...*/
     public void proximaPeca()
     {
+        cloneID++;
         Debug.Log("Pos Spawn: "+transform.position);
-        Instantiate(criaPecas[mostraProximaPeca], transform.position, Quaternion.identity);
+        GameObject clone = Instantiate(criaPecas[mostraProximaPeca].gameObject, transform.position, Quaternion.identity);
+        clone.name = clone.name + cloneID;
 
         mostraProximaPeca = Random.Range(0, criaPecas.Length);
        

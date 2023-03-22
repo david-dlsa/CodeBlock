@@ -203,13 +203,13 @@ public class tetroMov : MonoBehaviour
 
             if (gManagerGrade.dentroGrade(posBloco) == false)
             {
-                Debug.Log("FORA da grade 1");
+                Debug.Log("FORA da grade 1 com pos: "+posBloco);
                 return false;
             } 
 
             if(gManagerGrade.posicaoTransformGrade(posBloco) != null && 
                 gManagerGrade.posicaoTransformGrade(posBloco).parent != transform){
-                Debug.Log("FORA da grade 2");
+                Debug.Log("FORA da grade 2 com pos: "+posBloco);
                 return false;
             }
         }
