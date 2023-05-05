@@ -20,6 +20,8 @@ public class tetroMov : MonoBehaviour
 
     spawnTetro gSpawner;
 
+    Gabarito gGabarito;
+
     // Use this for initialization
     void Start()
     {
@@ -29,6 +31,7 @@ public class tetroMov : MonoBehaviour
         gManagerGrade = GameObject.FindObjectOfType<gameManagerGrade>();
         gController = GameObject.FindObjectOfType<gameController>();
         gSpawner = GameObject.FindObjectOfType<spawnTetro>();
+        gGabarito = GameObject.FindObjectOfType<Gabarito>();
     }
 
     // Update is called once per frame
@@ -89,7 +92,7 @@ public class tetroMov : MonoBehaviour
 
                     if(gManagerGrade.abaixoGrade(this)){
                         Debug.Log("GAME OVER (down):" + gManagerGrade.abaixoGrade(this));
-                        gController.ShowGameOver();
+                        //gController.ShowGameOver();
                     }
 
                     gManagerGrade.score += 10;
@@ -115,12 +118,12 @@ public class tetroMov : MonoBehaviour
 
                     if(gManagerGrade.abaixoGrade(this)){
                         Debug.Log("GAME OVER (up):" + gManagerGrade.abaixoGrade(this));
-                        gController.ShowGameOver();
+                        //gController.ShowGameOver();
                     }
                     else{
                     gManagerGrade.score += 10;
                     enabled = false;
-                    gSpawner.proximaPeca();
+                    gGabarito.gerarBlocoLinha();
                     }
                 }
                 //queda = Time.time;
@@ -138,12 +141,12 @@ public class tetroMov : MonoBehaviour
 
                     if(gManagerGrade.abaixoGrade(this)){
                         Debug.Log("GAME OVER (auto):" + gManagerGrade.abaixoGrade(this));
-                        gController.ShowGameOver();
+                        //gController.ShowGameOver();
                     }
                     else{
                     gManagerGrade.score += 10;
                     enabled = false;
-                    gSpawner.proximaPeca();
+                    gGabarito.gerarBlocoLinha();
                     }
                 }
                 queda = Time.time;
