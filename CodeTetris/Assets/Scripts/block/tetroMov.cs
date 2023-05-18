@@ -124,6 +124,7 @@ public class tetroMov : MonoBehaviour
                     gManagerGrade.score += 10;
                     enabled = false;
                     gGabarito.gerarBlocoLinha();
+                    //gSpawner.proximaPeca();
                     }
                 }
                 //queda = Time.time;
@@ -147,6 +148,7 @@ public class tetroMov : MonoBehaviour
                     gManagerGrade.score += 10;
                     enabled = false;
                     gGabarito.gerarBlocoLinha();
+                    //gSpawner.proximaPeca();
                     }
                 }
                 queda = Time.time;

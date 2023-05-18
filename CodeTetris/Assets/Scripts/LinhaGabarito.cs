@@ -7,18 +7,22 @@ using static UnityEngine.UI.Image;
 public class LinhaGabarito : MonoBehaviour
 {
     public Transform[] elementos;
-    public Transform[] elementosAux;
+    public Transform[] elementosAux; 
 
+    public int indexElementoAtual = 0;
+    public int countElementoAtual = 0;
     private int indexLinhaAtual = 0;
-    private int elementoAtual = 0;
 
     private int cloneID = 0;
 
     // Use this for initialization
     void Start()
     {
+
         // Cria uma lista auxiliar com os elementos da linha atual
-        Array.Copy(elementos, elementosAux, elementos.Length);
+        countElementoAtual = elementos.Length;
+        fazCopiaElementos();
+        CriarPeca(indexElementoAtual);
     }
 
     public void CriarPeca(int indexElementoAtual)
@@ -36,35 +40,29 @@ public class LinhaGabarito : MonoBehaviour
             clone.name = clone.name + cloneID;
 
             // Remove o elemento selecionado da lista auxiliar
-            //elementosAux.RemoveAt(index);
+            countElementoAtual++;
             return;
         }
         //Se não tiver mais elementos reinicia o indice de elementos
         else
         {
             Debug.LogWarning("Lista de elementos da linha atual está vazia! Avançando para a próxima linha...");
-            verificaLinhaAtual();
-            elementoAtual = 0;
+            indexElementoAtual = 0;
+            countElementoAtual = 0;
             return;
         }
     }
 
-    public int verificaLinhaAtual()
+    public void fazCopiaElementos()
     {
-        
-        //Verifica se ainda há linhas para serem geradas se acabar retorna
-        if (indexLinhaAtual >= elementosAux.Length)
+        if(elementosAux.Length == 0)
         {
-            Debug.LogError("Todas as linhas do gabarito já foram esgotadas!");
-        }
-        else
-        {
-            //Se acabar os elementos dentro da linha atual vai para a proxima linha
-            if (elementosAux.Length <= 0)
+            if(elementosAux.Length != elementos.Length)
             {
-                indexLinhaAtual++;
+                elementosAux = new Transform[elementos.Length];
             }
+            countElementoAtual = elementos.Length;
+            Array.Copy(elementos, elementosAux, elementos.Length);
         }
-        return indexLinhaAtual;
     }
 }

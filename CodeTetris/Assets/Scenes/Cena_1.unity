@@ -787,6 +787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372a97cf700bac1438ccc30335a009ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mostraProximaPeca: 0
   criaPecas:
   - {fileID: 4362083780343007754, guid: a2be6f804eecaa446b7587509ce32bb1, type: 3}
   - {fileID: 4534889424279433554, guid: 01ac675efef1a5744b8917e54894c2a1, type: 3}
@@ -1164,6 +1165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 372a97cf700bac1438ccc30335a009ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mostraProximaPeca: 0
   criaPecas:
   - {fileID: 6394468724085124761, guid: d7f090408f97aa6468cef07a381839c6, type: 3}
   - {fileID: 6010102295435758748, guid: 085b76f89f2563747bc1d283220824a1, type: 3}
@@ -6576,9 +6578,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   linhas:
-  - {fileID: 8416489832405601568, guid: 6fd670cff37a7184595fc33110cf21c2, type: 3}
   - {fileID: 2383925973725362972, guid: 3de88cd7345ff0e4485a2d9d4106fa05, type: 3}
-  linhaAtual: 0
+  - {fileID: 8416489832405601568, guid: 6fd670cff37a7184595fc33110cf21c2, type: 3}
+  indexLinhaAtual: 0
 --- !u!4 &1766772080
 Transform:
   m_ObjectHideFlags: 0
