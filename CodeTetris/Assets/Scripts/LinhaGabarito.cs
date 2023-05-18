@@ -11,7 +11,6 @@ public class LinhaGabarito : MonoBehaviour
 
     public int indexElementoAtual = 0;
     public int countElementoAtual = 0;
-    private int indexLinhaAtual = 0;
 
     private int cloneID = 0;
 
@@ -28,27 +27,23 @@ public class LinhaGabarito : MonoBehaviour
     public void CriarPeca(int indexElementoAtual)
     {
         // Verifica se ainda há elementos na lista auxiliar
-        if (indexElementoAtual < (elementosAux.Length))
+        if (indexElementoAtual < (elementos.Length))
         {
             // Seleciona aleatoriamente um elemento da lista auxiliar
             //int index = Random.Range(0, elementosAux.Count);
-            GameObject elementoAtual = elementosAux[indexElementoAtual].gameObject;
+            //GameObject elementoAtual = elementos[indexElementoAtual].gameObject;
 
             // Instancia uma peça a partir do elemento selecionado
             cloneID++;
-            GameObject clone = Instantiate(elementoAtual, transform.position, Quaternion.identity);
+            GameObject clone = Instantiate(elementos[indexElementoAtual].gameObject, transform.position, Quaternion.identity);
             clone.name = clone.name + cloneID;
 
             // Remove o elemento selecionado da lista auxiliar
-            countElementoAtual++;
-            return;
         }
         //Se não tiver mais elementos reinicia o indice de elementos
         else
         {
             Debug.LogWarning("Lista de elementos da linha atual está vazia! Avançando para a próxima linha...");
-            indexElementoAtual = 0;
-            countElementoAtual = 0;
             return;
         }
     }
@@ -61,7 +56,6 @@ public class LinhaGabarito : MonoBehaviour
             {
                 elementosAux = new Transform[elementos.Length];
             }
-            countElementoAtual = elementos.Length;
             Array.Copy(elementos, elementosAux, elementos.Length);
         }
     }

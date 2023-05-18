@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8416489832405601575}
   - component: {fileID: 8416489832405601568}
   m_Layer: 0
-  m_Name: Linha 1
+  m_Name: Linha B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,10 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   elementos:
-  - {fileID: 6709519630673610549, guid: 6054bce6f7d61e1499776073e7dd59e3, type: 3}
-  - {fileID: 6771051602163664360, guid: c8b6ad50fc095404c83c8632967fe691, type: 3}
-  - {fileID: 3477464225704993802, guid: 23839cb5480e8b548a2caa06ad4c6d5c, type: 3}
-  elementosAux:
-  - {fileID: 6709519630673610549, guid: 6054bce6f7d61e1499776073e7dd59e3, type: 3}
-  - {fileID: 6771051602163664360, guid: c8b6ad50fc095404c83c8632967fe691, type: 3}
-  - {fileID: 3477464225704993802, guid: 23839cb5480e8b548a2caa06ad4c6d5c, type: 3}
+  - {fileID: 6010102295435758748, guid: 085b76f89f2563747bc1d283220824a1, type: 3}
+  - {fileID: 6394468724085124761, guid: d7f090408f97aa6468cef07a381839c6, type: 3}
+  - {fileID: 317259922282336878, guid: e23b041dc682fff478ebf63021becdd8, type: 3}
+  elementosAux: []
+  indexElementoAtual: 0
+  countElementoAtual: 1
