@@ -7,7 +7,6 @@ using static UnityEngine.UI.Image;
 public class LinhaGabarito : MonoBehaviour
 {
     public Transform[] elementos;
-    public Transform[] elementosAux; 
 
     public int indexElementoAtual = 0;
     public int countElementoAtual = 0;
@@ -20,7 +19,6 @@ public class LinhaGabarito : MonoBehaviour
 
         // Cria uma lista auxiliar com os elementos da linha atual
         countElementoAtual = elementos.Length;
-        fazCopiaElementos();
         CriarPeca(indexElementoAtual);
     }
 
@@ -45,18 +43,6 @@ public class LinhaGabarito : MonoBehaviour
         {
             Debug.LogWarning("Lista de elementos da linha atual está vazia! Avançando para a próxima linha...");
             return;
-        }
-    }
-
-    public void fazCopiaElementos()
-    {
-        if(elementosAux.Length == 0)
-        {
-            if(elementosAux.Length != elementos.Length)
-            {
-                elementosAux = new Transform[elementos.Length];
-            }
-            Array.Copy(elementos, elementosAux, elementos.Length);
         }
     }
 }

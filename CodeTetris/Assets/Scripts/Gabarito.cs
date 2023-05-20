@@ -14,7 +14,6 @@ public class Gabarito : MonoBehaviour
     {
         elementoAtual = 0;
         linhaAtual = linhas[indexLinhaAtual];
-        linhaAtual.fazCopiaElementos();
         gerarBlocoLinha();
     }
 
