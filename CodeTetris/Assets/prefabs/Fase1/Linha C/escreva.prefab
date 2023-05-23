@@ -65,4 +65,6 @@ MonoBehaviour:
   quadradoPrefab: {fileID: 2121465023118366669, guid: 80cbef634f814d0418b98141aa5b59c8, type: 3}
   sprite: {fileID: 21300000, guid: 438b57cebedb577418e915f7c1d3879f, type: 3}
   texto: escreva
+  x: 0
+  y: 14
   tamanhoMaximo: 8

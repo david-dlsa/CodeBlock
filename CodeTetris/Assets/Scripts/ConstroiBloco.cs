@@ -10,6 +10,7 @@ public class ConstroiBloco : MonoBehaviour
     public GameObject quadradoPrefab;
     public Sprite sprite;
     public string texto;
+    public int x, y;
     public float tamanhoMaximo = 0.8f;
     private string nomeDoObjeto = "partCode";
     private string tagDoObjeto = "partCode";

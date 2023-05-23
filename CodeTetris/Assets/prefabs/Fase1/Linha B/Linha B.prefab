@@ -46,7 +46,6 @@ MonoBehaviour:
   elementos:
   - {fileID: 4281877972475821047, guid: 7ba2d52ac0a825447b6237a21be8cd0f, type: 3}
   - {fileID: 2976525007867040678, guid: f9f3668a0e0db17489df4039e1223b39, type: 3}
-  - {fileID: 9099984884526900868, guid: 67c3c9409a53c094589d408dc3068b73, type: 3}
-  elementosAux: []
+  - {fileID: 3664622994634305024, guid: c26138bf7cbd6814ab2dedb243372913, type: 3}
   indexElementoAtual: 0
   countElementoAtual: 1

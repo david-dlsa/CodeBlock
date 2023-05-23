@@ -45,7 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elementos:
   - {fileID: 279838487800838857, guid: e081bc1c464731348ad49a9898dd647c, type: 3}
-  - {fileID: 9099984884526900868, guid: 67c3c9409a53c094589d408dc3068b73, type: 3}
-  elementosAux: []
+  - {fileID: 8735586182754097205, guid: 7668ec081ca2b43418becf496225739d, type: 3}
   indexElementoAtual: 0
   countElementoAtual: 0
