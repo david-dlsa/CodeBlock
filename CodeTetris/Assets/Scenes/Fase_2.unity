@@ -541,7 +541,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &179713775
 RectTransform:
   m_ObjectHideFlags: 0
@@ -581,7 +581,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\t}"
+  m_text: "\t\t}"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -590,8 +590,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278216947
+  m_fontColor: {r: 0.9529412, g: 0.40784314, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -706,7 +706,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 13
+  index: 10
+  pular: 0
 --- !u!222 &179713779
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -899,7 +900,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: -10
+  index: 0
+  pular: 1
 --- !u!222 &182927590
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1388,7 +1390,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: -10
+  index: 0
+  pular: 1
 --- !u!222 &237897338
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2030,7 +2033,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: -10
+  index: 0
+  pular: 1
 --- !u!222 &278186264
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2098,7 +2102,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: '}'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2107,8 +2111,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278216947
+  m_fontColor: {r: 0.9529412, g: 0.40784314, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2223,7 +2227,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: -10
+  index: 11
+  pular: 0
 --- !u!222 &301249148
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2608,7 +2613,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &429654912
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2773,7 +2778,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 2
+  index: 0
+  pular: 1
 --- !u!222 &429654916
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3048,7 +3054,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &545806915
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3097,8 +3103,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278216947
+  m_fontColor: {r: 0.9529412, g: 0.40784314, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3213,7 +3219,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 10
+  index: 8
+  pular: 0
 --- !u!222 &545806919
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3241,7 +3248,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &570251815
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3281,7 +3288,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\t\tleia(numero)"
+  m_text: "\t\t<color=#691CFE>leia</color><color=#F36800>(</color><color=#2BC40A>numero</color><color=#F36800>)</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3407,6 +3414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 4
+  pular: 0
 --- !u!222 &570251819
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3748,7 +3756,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &634796353
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3788,7 +3796,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '}'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3797,8 +3805,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278216947
+  m_fontColor: {r: 0.9529412, g: 0.40784314, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3913,7 +3921,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 14
+  index: 0
+  pular: 1
 --- !u!222 &634796357
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3941,7 +3950,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &644370396
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3981,7 +3990,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\t\tescreva(\"\\\\n\")"
+  m_text: "\t\t\t<color=#691CFE>escreva</color><color=#2BC40A>(\"O n\xFAmero \xE9
+    igual zero\")</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4106,7 +4116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 12
+  index: 10
+  pular: 0
 --- !u!222 &644370400
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4299,7 +4310,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: -10
+  index: 0
+  pular: 1
 --- !u!222 &645267664
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4327,7 +4339,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &653069481
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4367,7 +4379,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\tfuncao inicio(){"
+  m_text: "\t<color=#02CFD0>funcao</color> <color=#0086FC>inicio()</color> <color=#F36800>{</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4493,6 +4505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 1
+  pular: 0
 --- !u!222 &653069485
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4921,7 +4934,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: -10
+  index: 0
+  pular: 1
 --- !u!222 &691472833
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5360,7 +5374,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: -10
+  index: 0
+  pular: 1
 --- !u!222 &756613280
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6447,7 +6462,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &971263264
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6487,7 +6502,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\t\tsenao se(numero < 0){"
+  m_text: "\t\t<color=#0086FC>senao</color> <color=#0086FC>se</color><color=#F36800>(</color><color=#2BC40A>numero</color>
+    <color=#F36800><</color> <color=#2BC40A>0</color><color=#F36800>)</color><color=#F36800>{</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -6612,7 +6628,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 8
+  index: 7
+  pular: 0
 --- !u!222 &971263268
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7207,7 +7224,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\t\t<color=#691CFE>escreva</color><color=#2BC40A>(\"\\\\n\")</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7332,7 +7349,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: -10
+  index: 11
+  pular: 0
 --- !u!222 &1126064199
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7525,7 +7543,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: -10
+  index: 0
+  pular: 1
 --- !u!222 &1130603517
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7800,7 +7819,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: -10
+  index: 0
+  pular: 1
 --- !u!222 &1150281214
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7828,7 +7848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1171116448
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7877,8 +7897,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278216947
+  m_fontColor: {r: 0.9529412, g: 0.40784314, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7993,7 +8013,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 7
+  index: 6
+  pular: 0
 --- !u!222 &1171116452
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8515,7 +8536,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1227387396
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8555,7 +8576,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\t\t\tescreva(\"O n\xFAmero \xE9 negativo\")"
+  m_text: "\t\t\t<color=#691CFE>escreva</color><color=#2BC40A>(\"O n\xFAmero \xE9
+    negativo\")</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -8680,7 +8702,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 9
+  index: 8
+  pular: 0
 --- !u!222 &1227387400
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -9825,7 +9848,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1469828847
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9865,7 +9888,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\t\tinteiro numero"
+  m_text: "\t\t<color=#B70B19>inteiro</color> <color=#2BC40A>numero</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -9991,6 +10014,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 2
+  pular: 0
 --- !u!222 &1469828851
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10018,7 +10042,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1509587228
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10183,7 +10207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 4
+  index: 0
+  pular: 1
 --- !u!222 &1509587232
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -10648,7 +10673,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: -10
+  index: 0
+  pular: 1
 --- !u!222 &1546700205
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11136,7 +11162,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1719611670
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11176,7 +11202,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\t\tescreva(\"Digite um n\xFAmero inteiro: \")"
+  m_text: "\t\t<color=#691CFE>escreva</color><color=#2BC40A>(\"Digite um n\xFAmero
+    inteiro: \")</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11302,6 +11329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 3
+  pular: 0
 --- !u!222 &1719611674
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11329,7 +11357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1737270998
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11369,7 +11397,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\t\t\tescreva(\"O n\xFAmero \xE9 positivo\")"
+  m_text: "\t\t\t<color=#691CFE>escreva</color><color=#2BC40A>(\"O n\xFAmero \xE9
+    positivo\")</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11495,6 +11524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 6
+  pular: 0
 --- !u!222 &1737271002
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -11826,7 +11856,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: -10
+  index: 0
+  pular: 1
 --- !u!222 &1773070531
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12638,7 +12669,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\t}"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12647,8 +12678,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4278216947
+  m_fontColor: {r: 0.9529412, g: 0.40784314, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -12763,7 +12794,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: -10
+  index: 11
+  pular: 0
 --- !u!222 &1917339003
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -12811,7 +12843,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1967933131
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12851,7 +12883,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: "\t\t<color=#0086FC>senao</color><color=#F36800>{</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -12976,7 +13008,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a80dcea2630934ca3ac8af8882c11c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  index: 11
+  index: 9
+  pular: 0
 --- !u!222 &1967933135
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13262,7 +13295,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2061841905
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13311,8 +13344,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2214619379
-  m_fontColor: {r: 0.95294124, g: 0.40784317, b: 0, a: 0.5176471}
+    rgba: 4281874488
+  m_fontColor: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -13428,6 +13461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 0
+  pular: 0
 --- !u!222 &2061841909
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13521,7 +13555,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2080290268
 RectTransform:
   m_ObjectHideFlags: 0
@@ -13561,7 +13595,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\t\tse(numero > 0){"
+  m_text: "\t\t<color=#0086FC>se</color><color=#F36800>(</color><color=#2BC40A>numero
+    </color><color=#F36800>> </color><color=#2BC40A>0</color><color=#F36800>)</color><color=#F36800>{</color>"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13687,6 +13722,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   index: 5
+  pular: 0
 --- !u!222 &2080290272
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13930,63 +13966,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4915315069813695845, guid: 8b1a269b28c52bf4cadfe7045f388f27, type: 3}
   m_PrefabInstance: {fileID: 6818225805714844730}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &3556672683078082142
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 2005148520}
-    m_Modifications:
-    - target: {fileID: 5697742921835763201, guid: 079fe6d3b449dab46933643ebddd6ef7, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5697742921835763201, guid: 079fe6d3b449dab46933643ebddd6ef7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5697742921835763201, guid: 079fe6d3b449dab46933643ebddd6ef7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5697742921835763201, guid: 079fe6d3b449dab46933643ebddd6ef7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5697742921835763201, guid: 079fe6d3b449dab46933643ebddd6ef7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5697742921835763201, guid: 079fe6d3b449dab46933643ebddd6ef7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5697742921835763201, guid: 079fe6d3b449dab46933643ebddd6ef7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5697742921835763201, guid: 079fe6d3b449dab46933643ebddd6ef7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5697742921835763201, guid: 079fe6d3b449dab46933643ebddd6ef7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5697742921835763201, guid: 079fe6d3b449dab46933643ebddd6ef7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5697742921835763201, guid: 079fe6d3b449dab46933643ebddd6ef7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5697742921835763204, guid: 079fe6d3b449dab46933643ebddd6ef7, type: 3}
-      propertyPath: m_Name
-      value: '}'
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 079fe6d3b449dab46933643ebddd6ef7, type: 3}
 --- !u!1001 &3993206261859862346
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14110,8 +14089,65 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6272689040699095903, guid: c4f52a5c1e800f948950e2493244dcb4, type: 3}
   m_PrefabInstance: {fileID: 3993206261859862346}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7566736865721463685
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2005148520}
+    m_Modifications:
+    - target: {fileID: 1678671814313524186, guid: fa61880ae14d2c4459560b47b43efe15, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678671814313524186, guid: fa61880ae14d2c4459560b47b43efe15, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678671814313524186, guid: fa61880ae14d2c4459560b47b43efe15, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678671814313524186, guid: fa61880ae14d2c4459560b47b43efe15, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678671814313524186, guid: fa61880ae14d2c4459560b47b43efe15, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678671814313524186, guid: fa61880ae14d2c4459560b47b43efe15, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678671814313524186, guid: fa61880ae14d2c4459560b47b43efe15, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678671814313524186, guid: fa61880ae14d2c4459560b47b43efe15, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678671814313524186, guid: fa61880ae14d2c4459560b47b43efe15, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678671814313524186, guid: fa61880ae14d2c4459560b47b43efe15, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678671814313524186, guid: fa61880ae14d2c4459560b47b43efe15, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1678671814313524191, guid: fa61880ae14d2c4459560b47b43efe15, type: 3}
+      propertyPath: m_Name
+      value: '}'
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fa61880ae14d2c4459560b47b43efe15, type: 3}
 --- !u!4 &9099984884074547295 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5697742921835763201, guid: 079fe6d3b449dab46933643ebddd6ef7, type: 3}
-  m_PrefabInstance: {fileID: 3556672683078082142}
+  m_CorrespondingSourceObject: {fileID: 1678671814313524186, guid: fa61880ae14d2c4459560b47b43efe15, type: 3}
+  m_PrefabInstance: {fileID: 7566736865721463685}
   m_PrefabAsset: {fileID: 0}

@@ -45,6 +45,16 @@ public class ConstroiBloco : MonoBehaviour
         textMeshPro.text = texto;
         textMeshPro.alignment = TextAlignmentOptions.Center;
 
+        // Definir a fonte desejada
+        TMP_FontAsset fontAsset = Resources.Load<TMP_FontAsset>("Fonts & Materials/Oswald Bold SDF");
+        textMeshPro.font = fontAsset;
+
+        // Ativar o contorno com espessura personalizada
+        textMeshPro.enableVertexGradient = true;
+        textMeshPro.enableAutoSizing = false; // Desativar o ajuste automático do tamanho do texto
+        textMeshPro.outlineWidth = 0.2f; // Espessura do contorno
+        textMeshPro.outlineColor = Color.black; // Cor do contorno
+
         // Ajusta o tamanho da label
         RectTransform rectTransform = textMeshPro.GetComponent<RectTransform>();
         float menorLado = Mathf.Min(rectTransform.rect.width, rectTransform.rect.height);
