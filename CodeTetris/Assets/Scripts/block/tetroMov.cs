@@ -114,7 +114,7 @@ public class tetroMov : MonoBehaviour
                 }
                 else{
                     transform.position += new Vector3(0, -1, 0);
-                    //gManagerGrade.apagaLinha(this);
+                    gManagerGrade.apagaLinha(this);
 
                     if(gManagerGrade.abaixoGrade(this)){
                         Debug.Log("GAME OVER (up):" + gManagerGrade.abaixoGrade(this));
@@ -123,7 +123,7 @@ public class tetroMov : MonoBehaviour
                     else{
                     gManagerGrade.score += 10;
                     enabled = false;
-                    gGabarito.gabaritoComparativo(this.transform); //verifica se o bloco esta na posiçao correta
+                    //gGabarito.gabaritoComparativo(this.transform); //verifica se o bloco esta na posiçao correta
                     gGabarito.gerarBlocoLinha();
                     }
                 }
@@ -138,7 +138,7 @@ public class tetroMov : MonoBehaviour
                 }
                 else{
                     transform.position += new Vector3(0, -1, 0);  
-                    //gManagerGrade.apagaLinha(this);
+                    gManagerGrade.apagaLinha(this);
 
                     if(gManagerGrade.abaixoGrade(this)){
                         Debug.Log("GAME OVER (auto):" + gManagerGrade.abaixoGrade(this));
@@ -147,7 +147,7 @@ public class tetroMov : MonoBehaviour
                     else{
                     gManagerGrade.score += 10;
                     enabled = false;
-                    gGabarito.gabaritoComparativo(this.transform); //verifica se o bloco esta na posiçao correta
+                    //gGabarito.gabaritoComparativo(this.transform); //verifica se o bloco esta na posiçao correta
                     gGabarito.gerarBlocoLinha();
                     }
                 }
@@ -208,13 +208,13 @@ public class tetroMov : MonoBehaviour
 
             if (gManagerGrade.dentroGrade(posBloco) == false)
             {
-                Debug.Log("FORA da grade 1 com pos: "+posBloco);
+                //Debug.Log("FORA da grade 1 com pos: "+posBloco);
                 return false;
             } 
 
             if(gManagerGrade.posicaoTransformGrade(posBloco) != null && 
                 gManagerGrade.posicaoTransformGrade(posBloco).parent != transform){
-                Debug.Log("FORA da grade 2 com pos: "+posBloco);
+                //Debug.Log("FORA da grade 2 com pos: "+posBloco);
                 return false;
             }
         }

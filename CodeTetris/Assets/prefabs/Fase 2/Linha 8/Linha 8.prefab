@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6355213917367891664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6355213917367891665}
+  - component: {fileID: 6355213917367891670}
+  m_Layer: 0
+  m_Name: Linha 8
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6355213917367891665
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6355213917367891664}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6355213917367891670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6355213917367891664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91fc8201c6664f540a847b941405b480, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elementos:
+  - {fileID: 4726506787266185161, guid: 1c59f299e00ddfb44b118a4a002fcc69, type: 3}
+  - {fileID: 5566249177399670742, guid: 326c41b4231804442963fccc199fb599, type: 3}
+  - {fileID: 4995659120605558573, guid: 61cb59328e2f58645b7bfd0f82889a25, type: 3}
+  - {fileID: 5429636721578435649, guid: 27ae26203f589fc458974b88c842ab22, type: 3}
+  - {fileID: 8147114398233921918, guid: 7920e8cb9e64a554d89fd24e08c6bde0, type: 3}
+  - {fileID: 4241309667384352475, guid: 5ef4f330d4929ff4e891bf64ac6321b5, type: 3}
+  - {fileID: 3793590708236441655, guid: a20ab333e54fa8c45b320c7c0b336848, type: 3}
+  - {fileID: 7029232745408741597, guid: f0630cea4aa685940a00af498b8ead5f, type: 3}
+  indexElementoAtual: 0
+  countElementoAtual: 1

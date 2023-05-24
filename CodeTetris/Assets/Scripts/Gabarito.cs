@@ -66,6 +66,12 @@ public class Gabarito : MonoBehaviour
 
     public void gabaritoComparativo(Transform elemento)
     {
+        if (elemento == null)
+        {
+            // O objeto foi destruído, faça o tratamento apropriado aqui
+            return;
+        }
+
         // Crie um novo hash para armazenar as informações comparativas
         Dictionary<int, List<Transform>> hashComparativo = new Dictionary<int, List<Transform>>();
 
@@ -88,6 +94,11 @@ public class Gabarito : MonoBehaviour
             Transform elementoA = listaA[i];
             ConstroiBloco blocoA = elementoA.GetComponent<ConstroiBloco>();
             ConstroiBloco blocoElemento = elemento.GetComponent<ConstroiBloco>();
+            if (blocoElemento == null)
+            {
+                // O componente ConstroiBloco não está presente no objeto, faça o tratamento apropriado aqui
+                return;
+            }
 
             if (blocoA.texto == blocoElemento.texto &&
                 blocoA.x == blocoElemento.x &&

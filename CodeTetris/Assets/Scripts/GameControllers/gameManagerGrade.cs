@@ -16,6 +16,13 @@ public class gameManagerGrade : MonoBehaviour {
 
     public static Transform[,] grade = new Transform[largura, altura];
 
+    QuadroResultado gQuadroResultado;
+
+    void Start()
+    {
+        gQuadroResultado = GameObject.FindObjectOfType<QuadroResultado>();
+    }
+
     void Update(){
         textoScore.text = "Pontos: " + score.ToString();
     }
@@ -78,19 +85,27 @@ public class gameManagerGrade : MonoBehaviour {
 
     public void deletaQuadrado(int y)
     {
+        //string textos = "";
+        //ConstroiBloco bloco;
+
         for (int x = 0; x < largura; x++)
+        {
+            if (grade[x, y] != null)
             {
-                if (grade[x, y] != null)
-                {
-                    Destroy(grade[x, y].transform.parent.gameObject);
-                    grade[x, y] = null;
-                }
-                if (grade[x, (y+1)] != null)
-                {
-                    Destroy(grade[x, (y + 1)].transform.parent.gameObject);
-                    grade[x, (y + 1)] = null;
-                }
+                //bloco = grade[x, y].transform.parent.gameObject.GetComponent<ConstroiBloco>();
+                //textos += " " + bloco.texto;
+                Destroy(grade[x, y].transform.parent.gameObject);
+                grade[x, y] = null;
             }
+            if (grade[x, (y+1)] != null)
+            {
+                Destroy(grade[x, (y + 1)].transform.parent.gameObject);
+                grade[x, (y + 1)] = null;
+            }
+        }
+        int index = (18 - y)/2;
+        gQuadroResultado.AtivarFilhoPorIndex(index);
+        gQuadroResultado.DecrementarIndicesFilhos();
     }
 
     public void moveLinhaCima(int y)
