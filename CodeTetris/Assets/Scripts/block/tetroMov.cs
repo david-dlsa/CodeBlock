@@ -22,6 +22,8 @@ public class tetroMov : MonoBehaviour
 
     Gabarito gGabarito;
 
+    ConstroiBloco gConstroiBloco;
+
     // Use this for initialization
     void Start()
     {
@@ -32,10 +34,11 @@ public class tetroMov : MonoBehaviour
         gController = GameObject.FindObjectOfType<gameController>();
         gSpawner = GameObject.FindObjectOfType<spawnTetro>();
         gGabarito = GameObject.FindObjectOfType<Gabarito>();
+        gConstroiBloco = GetComponent<ConstroiBloco>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (!gManagerGrade.pause){
             if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.DownArrow))
@@ -116,11 +119,12 @@ public class tetroMov : MonoBehaviour
                     transform.position += new Vector3(0, -1, 0);
                     gManagerGrade.apagaLinha(this);
 
-                    if(gManagerGrade.abaixoGrade(this)){
+                    if (gManagerGrade.abaixoGrade(this)){
                         Debug.Log("GAME OVER (up):" + gManagerGrade.abaixoGrade(this));
                         //gController.ShowGameOver();
                     }
                     else{
+                    gConstroiBloco.PlaySFXWithDuration(gConstroiBloco.conectadoSound);
                     gManagerGrade.score += 10;
                     enabled = false;
                     //gGabarito.gabaritoComparativo(this.transform); //verifica se o bloco esta na posiçao correta
@@ -137,14 +141,15 @@ public class tetroMov : MonoBehaviour
                     gManagerGrade.atualizaGrade(this);
                 }
                 else{
-                    transform.position += new Vector3(0, -1, 0);  
+                    transform.position += new Vector3(0, -1, 0);
                     gManagerGrade.apagaLinha(this);
 
-                    if(gManagerGrade.abaixoGrade(this)){
+                    if (gManagerGrade.abaixoGrade(this)){
                         Debug.Log("GAME OVER (auto):" + gManagerGrade.abaixoGrade(this));
                         //gController.ShowGameOver();
                     }
                     else{
+                    gConstroiBloco.PlaySFXWithDuration(gConstroiBloco.conectadoSound);
                     gManagerGrade.score += 10;
                     enabled = false;
                     //gGabarito.gabaritoComparativo(this.transform); //verifica se o bloco esta na posiçao correta

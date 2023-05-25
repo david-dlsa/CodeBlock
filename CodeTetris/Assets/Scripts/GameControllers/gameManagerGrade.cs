@@ -24,7 +24,7 @@ public class gameManagerGrade : MonoBehaviour {
     }
 
     void Update(){
-        textoScore.text = "Pontos: " + score.ToString();
+        //textoScore.text = "Pontos: " + score.ToString();
     }
 
     //Esta dentro da largura e se é menor que a altura
@@ -87,7 +87,6 @@ public class gameManagerGrade : MonoBehaviour {
     {
         //string textos = "";
         //ConstroiBloco bloco;
-
         for (int x = 0; x < largura; x++)
         {
             if (grade[x, y] != null)
@@ -104,7 +103,9 @@ public class gameManagerGrade : MonoBehaviour {
             }
         }
         int index = (18 - y)/2;
+
         gQuadroResultado.AtivarFilhoPorIndex(index);
+        gQuadroResultado.PlaySFX();
         gQuadroResultado.DecrementarIndicesFilhos();
     }
 
@@ -145,11 +146,13 @@ public class gameManagerGrade : MonoBehaviour {
 
     public void apagaLinha(tetroMov pecaTetris)
     {
-        for (int y=altura-1; y >= 0; y--)
+        
+        for (int y = altura - 1; y >= 0; y--)
         {
-            if (linhaCheia(y)){
+            if (linhaCheia(y))
+            {
                 int auxY;
-                if (y%2 == 0)
+                if (y % 2 == 0)
                 {
                     auxY = y;
                 }
@@ -157,6 +160,7 @@ public class gameManagerGrade : MonoBehaviour {
                 {
                     auxY = y - 1;
                 }
+
                 deletaQuadrado(auxY);
                 moveTodasLinhasCima(auxY - 1);
                 y++;

@@ -68,3 +68,7 @@ MonoBehaviour:
   x: 11
   y: 18
   tamanhoMaximo: 8
+  conectadoSound: {fileID: 0}
+  erradoSound: {fileID: 0}
+  winSound: {fileID: 0}
+  audioSource: {fileID: 0}

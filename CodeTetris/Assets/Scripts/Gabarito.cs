@@ -16,8 +16,14 @@ public class Gabarito : MonoBehaviour
     // Dicionário para armazenar o gabarito comparativo
     Dictionary<int, List<LinhaGabarito>> hashComparativo;
 
+
+    MoveParaProximaFase gMoveParaProximaFase;
+
     void Start()
     {
+
+        gMoveParaProximaFase = GameObject.FindObjectOfType<MoveParaProximaFase>();
+
         elementoAtual = 0;
         linhaAtual = linhas[indexLinhaAtual];
         gerarBlocoLinha();
@@ -47,7 +53,7 @@ public class Gabarito : MonoBehaviour
             if(elementoAtual <= (linhaAtual.elementos.Length - 1)){
                 linhaAtual.CriarPeca(elementoAtual); // se isso me retornar algo eu criei um bloco e quero incrementar pro proximo
                 elementoAtual++;
-                Debug.Log(elementoAtual);
+                //Debug.Log(elementoAtual);
             }
             else
             {
@@ -56,6 +62,7 @@ public class Gabarito : MonoBehaviour
                 if (indexLinhaAtual > (linhas.Length - 1))
                 {
                     Debug.LogError("Todas as linhas do gabarito já foram esgotadas!");
+                    gMoveParaProximaFase.proximaCena();
                     return;
                 }
                 linhaAtual = linhas[indexLinhaAtual];

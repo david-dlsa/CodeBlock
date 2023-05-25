@@ -13,6 +13,8 @@ public class gameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        indexScene = SceneManager.GetActiveScene().buildIndex;
+
         instance = this;
         Time.timeScale = 1;
 
@@ -27,5 +29,10 @@ public class gameController : MonoBehaviour
 
     public void RestartGame(){
         SceneManager.LoadScene(indexScene);
+    }
+
+    public void OpenScene(int index)
+    {
+        SceneManager.LoadScene(index);
     }
 }

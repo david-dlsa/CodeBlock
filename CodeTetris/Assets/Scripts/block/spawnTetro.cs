@@ -18,13 +18,13 @@ public class spawnTetro : MonoBehaviour
     {
 
         mostraProximaPeca = Random.Range(0, criaPecas.Length);
-        Debug.Log("Tamanho array: " + criaPecas.Length + "Resultado: " + mostraProximaPeca);
+        //Debug.Log("Tamanho array: " + criaPecas.Length + "Resultado: " + mostraProximaPeca);
         proximaPeca();
     }
     public void proximaPeca()
     {
         cloneID++;
-        Debug.Log("Pos Spawn: " + transform.position);
+        //Debug.Log("Pos Spawn: " + transform.position);
         GameObject clone = Instantiate(criaPecas[mostraProximaPeca].gameObject, transform.position, Quaternion.identity);
         clone.name = clone.name + cloneID;
 

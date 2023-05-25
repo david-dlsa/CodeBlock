@@ -15,13 +15,32 @@ public class ConstroiBloco : MonoBehaviour
     private string nomeDoObjeto = "partCode";
     private string tagDoObjeto = "partCode";
 
+    public AudioClip conectadoSound;
+    public AudioClip erradoSound;
+    public AudioClip limpaLinhaSound;
+
+    SoundConfig gSoundConfig;
+
     void Start()
     {
+        gSoundConfig = GameObject.FindObjectOfType<SoundConfig>();
+
+        conectadoSound = gSoundConfig.conectadoSound;
+        erradoSound = gSoundConfig.erradoSound;
+
+        CarregarAudios();
+
         ConstruirBloco();
     }
 
     void ConstruirBloco()
     {
+        // Adiciona o componente AudioSource ao objeto
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+
+        // Configura o componente AudioSource
+        audioSource.playOnAwake = false;
+
         for (int i = 0; i < largura; i++)
         {
             for (int j = 0; j < altura; j++)
@@ -32,6 +51,12 @@ public class ConstroiBloco : MonoBehaviour
                 // Configura o sprite do quadrado
                 SpriteRenderer spriteRenderer = quadrado.GetComponent<SpriteRenderer>();
                 spriteRenderer.sprite = sprite;
+
+                // Adiciona o componente AudioSource ao objeto quadrado
+                AudioSource quadradoAudioSource = quadrado.AddComponent<AudioSource>();
+
+                // Configura o componente AudioSource do quadrado
+                quadradoAudioSource.playOnAwake = false;
             }
         }
 
@@ -46,7 +71,8 @@ public class ConstroiBloco : MonoBehaviour
         textMeshPro.alignment = TextAlignmentOptions.Center;
 
         // Definir a fonte desejada
-        TMP_FontAsset fontAsset = Resources.Load<TMP_FontAsset>("Fonts & Materials/Oswald Bold SDF");
+        TMP_FontAsset fontAsset = Resources.Load<TMP_FontAsset>("Fonts/LilitaOne-Regular Outline_Extended ASCII_72 SDF");
+
         textMeshPro.font = fontAsset;
 
         // Ativar o contorno com espessura personalizada
@@ -61,5 +87,22 @@ public class ConstroiBloco : MonoBehaviour
         float tamanhoDesejado = tamanhoMaximo * menorLado;
         float fontSize = tamanhoDesejado / menorLado;
         textMeshPro.fontSize = fontSize;
+
+        // Define SFX
+        conectadoSound = gSoundConfig.conectadoSound;
+        erradoSound = gSoundConfig.erradoSound;
+    }
+
+    public void PlaySFXWithDuration(AudioClip sfx)
+    {
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(sfx);
+    }
+
+    void CarregarAudios()
+    {
+        conectadoSound = Resources.Load<AudioClip>("CasualGameSounds/DM-CGS-03");
+        erradoSound = Resources.Load<AudioClip>("CasualGameSounds/DM-CGS-02");
+        limpaLinhaSound = Resources.Load<AudioClip>("CasualGameSounds/DM-CGS-24");
     }
 }
