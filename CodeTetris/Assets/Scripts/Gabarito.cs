@@ -1,7 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Gabarito : MonoBehaviour
 {
@@ -14,7 +16,7 @@ public class Gabarito : MonoBehaviour
     List<Transform> listaB;
 
     // Dicionário para armazenar o gabarito comparativo
-    Dictionary<int, List<LinhaGabarito>> hashComparativo;
+    Dictionary<string, HashSet<Vector2>> hashComparativo;
 
 
     MoveParaProximaFase gMoveParaProximaFase;
@@ -29,7 +31,7 @@ public class Gabarito : MonoBehaviour
         gerarBlocoLinha();
 
         // Inicializa o dicionário
-        hashComparativo = new Dictionary<int, List<LinhaGabarito>>();
+        hashComparativo = new Dictionary<string, HashSet<Vector2>>();
 
         listaB = new List<Transform>(); // Criar uma nova lista vazia
     }
@@ -71,89 +73,86 @@ public class Gabarito : MonoBehaviour
             }
     }
 
+    public void AtualizarCoordenadasY()
+    {
+        Dictionary<string, HashSet<Vector2>> novoHashComparativo = new Dictionary<string, HashSet<Vector2>>();
+
+        foreach (var pair in hashComparativo)
+        {
+            string chave = pair.Key;
+            List<Vector2> coordenadas = pair.Value.ToList(); // Converter List<Vector2>
+
+            // Atualizar as coordenadas Y
+            for (int i = 0; i < coordenadas.Count; i++)
+            {
+                Vector2 coordenada = coordenadas[i];
+                coordenada.y++; // Decrementar o valor de Y
+                coordenadas[i] = coordenada;
+            }
+
+            HashSet<Vector2> coordenadasHashSet = new HashSet<Vector2>(coordenadas); // Converter para HashSet<Vector2>
+            novoHashComparativo.Add(chave, coordenadasHashSet);
+        }
+
+        hashComparativo = novoHashComparativo;
+    }
+
     public void gabaritoComparativo(Transform elemento)
     {
-        if (elemento == null)
+        if (elemento == null || elemento.gameObject == null)
         {
             // O objeto foi destruído, faça o tratamento apropriado aqui
             return;
         }
 
-        // Crie um novo hash para armazenar as informações comparativas
-        Dictionary<int, List<Transform>> hashComparativo = new Dictionary<int, List<Transform>>();
-
-        // Copie os elementos de linhas[] para a listaA
-        List<Transform> listaA = new List<Transform>();
-        foreach (LinhaGabarito linha in linhas)
+        // Verifique se o componente ConstroiBloco está presente no objeto
+        ConstroiBloco blocoElemento = elemento.GetComponent<ConstroiBloco>();
+        if (blocoElemento == null)
         {
-            listaA.AddRange(linha.elementos);
+            // O componente ConstroiBloco não está presente no objeto, faça o tratamento apropriado aqui
+            return;
         }
 
-        // Adicione a listaA ao hash usando o índice 0
-        hashComparativo.Add(0, listaA);
-
-        // Verifique se o elemento atual existe na listaA e está na mesma posição
-        bool elementoEncontrado = false;
-        List<int> indicesElementoA = new List<int>(); // Lista de índices de elementos correspondentes
-
-        for (int i = 0; i < listaA.Count; i++)
+        foreach (LinhaGabarito linha in linhas)
         {
-            Transform elementoA = listaA[i];
-            ConstroiBloco blocoA = elementoA.GetComponent<ConstroiBloco>();
-            ConstroiBloco blocoElemento = elemento.GetComponent<ConstroiBloco>();
-            if (blocoElemento == null)
+            foreach (Transform bloco in linha.elementos)
             {
-                // O componente ConstroiBloco não está presente no objeto, faça o tratamento apropriado aqui
+                // Verifica se a chave já existe no dicionário
+                if (hashComparativo.ContainsKey(bloco.GetComponent<ConstroiBloco>().texto))
+                {
+                    // A chave existe, então adiciona a coordenada no hash já existente
+                    HashSet<Vector2> coordenadas = hashComparativo[bloco.GetComponent<ConstroiBloco>().texto];
+                    coordenadas.Add(new Vector2(bloco.GetComponent<ConstroiBloco>().x, bloco.GetComponent<ConstroiBloco>().y));
+                }
+                else
+                {
+                    // A chave não existe, então cria uma nova entrada no dicionário
+                    HashSet<Vector2> coordenadas = new HashSet<Vector2>();
+                    coordenadas.Add(new Vector2(bloco.GetComponent<ConstroiBloco>().x, bloco.GetComponent<ConstroiBloco>().y));
+
+                    hashComparativo.Add(bloco.GetComponent<ConstroiBloco>().texto, coordenadas);
+                }
+            }
+        }
+
+        // Verifique se o elemento atual existe no dicionário de hashes
+        if (hashComparativo.ContainsKey(blocoElemento.texto))
+        {
+            HashSet<Vector2> coordenadas = hashComparativo[blocoElemento.texto];
+
+            // Verifique se alguma das coordenadas do hash corresponde às coordenadas do elemento atual
+            if (coordenadas.Contains(new Vector2(elemento.position.x, elemento.position.y)))
+            {
+                listaB.Add(elemento); // Adicionar o elemento atual à listaB
+                Debug.Log("Elemento TEM coordenada correspondente");
                 return;
             }
 
-            if (blocoA.texto == blocoElemento.texto &&
-                blocoA.x == blocoElemento.x &&
-                blocoA.y == blocoElemento.y)
-            {
-                elementoEncontrado = true;
-                indicesElementoA.Add(i); // Adicionar o índice do elemento correspondente encontrado
-            }
-        }
-
-        if (elementoEncontrado)
-        {
-            listaB.Add(elemento); // Adicionar o elemento atual à listaB
-
-            int indiceElementoB = listaB.FindIndex(x =>
-            {
-                ConstroiBloco blocoB = x.GetComponent<ConstroiBloco>();
-                ConstroiBloco blocoElemento = elemento.GetComponent<ConstroiBloco>();
-
-                return blocoB.texto == blocoElemento.texto &&
-                       blocoB.x == blocoElemento.x &&
-                       blocoB.y == blocoElemento.y;
-            });
-
-            int[] coordA = new int[2];
-            int ultimoIndiceA = indicesElementoA.Count - 1;
-            coordA[0] = listaA[indicesElementoA[ultimoIndiceA]].GetComponent<ConstroiBloco>().x;
-            coordA[1] = listaA[indicesElementoA[ultimoIndiceA]].GetComponent<ConstroiBloco>().y;
-
-            int[] coordB = new int[2];
-            coordB[0] = (int)listaB[indiceElementoB].position.x;
-            coordB[1] = (int)listaB[indiceElementoB].position.y;
-
-            if (coordA[0] == coordB[0] && coordA[1] == coordB[1])
-            {
-                // O elemento está na mesma posição
-                Debug.LogError("Elemento Atual ListaB == na listaA");
-            }
-            else
-            {
-                // O elemento está em uma posição diferente
-                Debug.LogError("Elemento Atual ListaB NAO esta na listaA");
-            }
+            Debug.Log("Elemento NÃO tem coordenada correspondente");
         }
         else
         {
-            // O elemento atual não existe na listaA
-            Debug.Log("Elemento não existe na listaA");
+            Debug.Log("Elemento não existe no dicionário de hashes");
         }
 
         // Faça o que for necessário com as informações comparativas

@@ -17,10 +17,12 @@ public class gameManagerGrade : MonoBehaviour {
     public static Transform[,] grade = new Transform[largura, altura];
 
     QuadroResultado gQuadroResultado;
+    Gabarito gGabarito;
 
     void Start()
     {
         gQuadroResultado = GameObject.FindObjectOfType<QuadroResultado>();
+        gGabarito = GameObject.FindObjectOfType<Gabarito>();
     }
 
     void Update(){
@@ -167,6 +169,9 @@ public class gameManagerGrade : MonoBehaviour {
                 score += 50;
             }
         }
+
+        //TODO ao apagar a linha acessar o hashComparativo e acrescentar 2 em todos os y de 
+        gGabarito.AtualizarCoordenadasY();
     }
 
     public bool abaixoGrade(tetroMov pecaTetro)

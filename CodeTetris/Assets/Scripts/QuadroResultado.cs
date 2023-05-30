@@ -55,7 +55,7 @@ public class QuadroResultado : MonoBehaviour
     {
         limpaLinhaSound = gSoundConfig.limpaLinhaSound;
         AudioSource audioSource = GetComponent<AudioSource>();
-        audioSource.volume = 0.5f; // Definir a altura do som
+        audioSource.volume = 0.3f; // Definir a altura do som
         audioSource.PlayOneShot(limpaLinhaSound);
         // StartCoroutine(StopSFXAfterDuration(audioSource, 0.5f));
 

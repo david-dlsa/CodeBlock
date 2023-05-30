@@ -127,7 +127,7 @@ public class tetroMov : MonoBehaviour
                     gConstroiBloco.PlaySFXWithDuration(gConstroiBloco.conectadoSound);
                     gManagerGrade.score += 10;
                     enabled = false;
-                    //gGabarito.gabaritoComparativo(this.transform); //verifica se o bloco esta na posiçao correta
+                    gGabarito.gabaritoComparativo(this.transform); //verifica se o bloco esta na posiçao correta
                     gGabarito.gerarBlocoLinha();
                     }
                 }
@@ -152,7 +152,7 @@ public class tetroMov : MonoBehaviour
                     gConstroiBloco.PlaySFXWithDuration(gConstroiBloco.conectadoSound);
                     gManagerGrade.score += 10;
                     enabled = false;
-                    //gGabarito.gabaritoComparativo(this.transform); //verifica se o bloco esta na posiçao correta
+                    gGabarito.gabaritoComparativo(this.transform); //verifica se o bloco esta na posiçao correta
                     gGabarito.gerarBlocoLinha();
                     }
                 }
