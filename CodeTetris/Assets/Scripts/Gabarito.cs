@@ -11,6 +11,7 @@ public class Gabarito : MonoBehaviour
 
     private int elementoAtual;
     public int indexLinhaAtual;
+    private int contadorMensagemNaoCorrespondente;
 
     LinhaGabarito linhaAtual;
     List<Transform> listaB;
@@ -20,11 +21,15 @@ public class Gabarito : MonoBehaviour
 
 
     MoveParaProximaFase gMoveParaProximaFase;
+    gameController gGameController;
+    gameManagerGrade gGameManagerGrade;
 
     void Start()
     {
 
         gMoveParaProximaFase = GameObject.FindObjectOfType<MoveParaProximaFase>();
+        gGameController = GameObject.FindObjectOfType<gameController>();
+        gGameManagerGrade = GameObject.FindObjectOfType<gameManagerGrade>();
 
         elementoAtual = 0;
         linhaAtual = linhas[indexLinhaAtual];
@@ -149,6 +154,18 @@ public class Gabarito : MonoBehaviour
             }
 
             Debug.Log("Elemento NÃO tem coordenada correspondente");
+
+            contadorMensagemNaoCorrespondente++;
+            if (contadorMensagemNaoCorrespondente >= 3)
+            {
+                gGameController.ShowGameOver();
+            }
+
+            // Apagar as linhas abaixo da linha atual
+            for (int i = (int)elemento.position.y; i > 0; i--)
+            {
+                gGameManagerGrade.deletaQuadrado(i);
+            }
         }
         else
         {

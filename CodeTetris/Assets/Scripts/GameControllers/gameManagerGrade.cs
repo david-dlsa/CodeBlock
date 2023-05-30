@@ -106,8 +106,10 @@ public class gameManagerGrade : MonoBehaviour {
         }
         int index = (18 - y)/2;
 
+        gGabarito.AtualizarCoordenadasY();
         gQuadroResultado.AtivarFilhoPorIndex(index);
-        gQuadroResultado.PlaySFX();
+        //TODO ta chamando MUITAS vezes por conta de ser chamado no metodo gabaritoComparativo
+        //gQuadroResultado.PlaySFX();
         gQuadroResultado.DecrementarIndicesFilhos();
     }
 
@@ -169,9 +171,6 @@ public class gameManagerGrade : MonoBehaviour {
                 score += 50;
             }
         }
-
-        //TODO ao apagar a linha acessar o hashComparativo e acrescentar 2 em todos os y de 
-        gGabarito.AtualizarCoordenadasY();
     }
 
     public bool abaixoGrade(tetroMov pecaTetro)
