@@ -69,6 +69,10 @@ public class Gabarito : MonoBehaviour
                 if (indexLinhaAtual > (linhas.Length - 1))
                 {
                     Debug.LogError("Todas as linhas do gabarito já foram esgotadas!");
+
+                    // Limpar o gabarito comparativo antes de iniciar a nova cena
+                    LimparGabaritoComparativo();
+
                     gMoveParaProximaFase.proximaCena();
                     return;
                 }
@@ -91,7 +95,7 @@ public class Gabarito : MonoBehaviour
             for (int i = 0; i < coordenadas.Count; i++)
             {
                 Vector2 coordenada = coordenadas[i];
-                coordenada.y++; // Decrementar o valor de Y
+                coordenada.y = coordenada.y + 2; // Incrementa o valor de Y
                 coordenadas[i] = coordenada;
             }
 
@@ -146,7 +150,7 @@ public class Gabarito : MonoBehaviour
             HashSet<Vector2> coordenadas = hashComparativo[blocoElemento.texto];
 
             // Verifique se alguma das coordenadas do hash corresponde às coordenadas do elemento atual
-            if (coordenadas.Contains(new Vector2(elemento.position.x, elemento.position.y)))
+            if (coordenadas.Contains(new Vector2(((elemento.position.x + blocoElemento.largura) - 1), elemento.position.y)))
             {
                 listaB.Add(elemento); // Adicionar o elemento atual à listaB
                 Debug.Log("Elemento TEM coordenada correspondente");
@@ -161,11 +165,15 @@ public class Gabarito : MonoBehaviour
                 gGameController.ShowGameOver();
             }
 
+            //TODO deve deletar, mas voltar ele para a lista de blocos que serão spawnados
+
             // Apagar as linhas abaixo da linha atual
+            /*
             for (int i = (int)elemento.position.y; i > 0; i--)
             {
                 gGameManagerGrade.deletaQuadrado(i);
             }
+            */
         }
         else
         {
@@ -174,6 +182,11 @@ public class Gabarito : MonoBehaviour
 
         // Faça o que for necessário com as informações comparativas
         // ...
+    }
+
+    public void LimparGabaritoComparativo()
+    {
+        hashComparativo.Clear();
     }
 
 }

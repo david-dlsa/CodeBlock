@@ -10,6 +10,8 @@ public class gameController : MonoBehaviour
 
     public static gameController instance;
     gameManagerGrade gManagerGrade;
+    Gabarito gGabarito;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,7 @@ public class gameController : MonoBehaviour
         Time.timeScale = 1;
 
         gManagerGrade = GameObject.FindObjectOfType<gameManagerGrade>();
+        gGabarito = GameObject.FindObjectOfType<Gabarito>();
     }
 
     public void ShowGameOver(){
@@ -33,6 +36,9 @@ public class gameController : MonoBehaviour
 
     public void OpenScene(int index)
     {
+        if(gGabarito != null){
+            gGabarito.LimparGabaritoComparativo();
+        }
         SceneManager.LoadScene(index);
     }
 }

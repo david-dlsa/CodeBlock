@@ -10,12 +10,16 @@ public class MoveParaProximaFase : MonoBehaviour
     SoundConfig gSoundConfig;
     public AudioClip vitoriaSound;
 
+    Gabarito gGabarito;
+
     // Start is called before the first frame update
     void Start()
     {
         gSoundConfig = GetComponent<SoundConfig>();
         vitoriaSound = gSoundConfig.vitoriaSound;
         nextSceneLoad = SceneManager.GetActiveScene().buildIndex + 1;
+
+        gGabarito = GameObject.FindObjectOfType<Gabarito>();
     }
 
     public void proximaCena()

@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 147194223}
   - component: {fileID: 147194224}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: "Bot\xF5es"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
