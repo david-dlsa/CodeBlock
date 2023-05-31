@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -13,6 +14,8 @@ public class Gabarito : MonoBehaviour
     public int indexLinhaAtual;
     private int contadorMensagemNaoCorrespondente;
 
+    private List<Transform> blocosRemovidos = new List<Transform>();
+
     LinhaGabarito linhaAtual;
     List<Transform> listaB;
 
@@ -23,6 +26,7 @@ public class Gabarito : MonoBehaviour
     MoveParaProximaFase gMoveParaProximaFase;
     gameController gGameController;
     gameManagerGrade gGameManagerGrade;
+    Vida gVida;
 
     void Start()
     {
@@ -30,6 +34,7 @@ public class Gabarito : MonoBehaviour
         gMoveParaProximaFase = GameObject.FindObjectOfType<MoveParaProximaFase>();
         gGameController = GameObject.FindObjectOfType<gameController>();
         gGameManagerGrade = GameObject.FindObjectOfType<gameManagerGrade>();
+        gVida = GetComponent<Vida>();
 
         elementoAtual = 0;
         linhaAtual = linhas[indexLinhaAtual];
@@ -43,21 +48,18 @@ public class Gabarito : MonoBehaviour
 
     public void gerarBlocoLinha()
     {
-        //TODO tnho que ver como pra fzr pra manejar entre verificar qual linha eestar, onde att a linha, verificar se os elementos da linha ja foram
-
-        //Verifica se ainda há linhas para serem geradas se acabar retorna
-       
-            //LinhaGabarito linhaAtual = linhas[indexLinhaAtual];
-
-            //TODO Depois que vai pra prox linha ele consegue por um elemento, mas volta pra primeira linha
-
-            //Cria um novo bloco
-           
-
             //Se a incrementaçao resultou em um index que não existe no array este
             //array já foi e quero avançar para o próximo incrementando o index da linha
 
             if(elementoAtual <= (linhaAtual.elementos.Length - 1)){
+
+                // Adiciona os blocos removidos de volta à lista de elementos
+                foreach (Transform blocoRemovido in blocosRemovidos)
+                {
+                    linhaAtual.elementos[elementoAtual] = blocoRemovido;
+                    elementoAtual++;
+                }
+
                 linhaAtual.CriarPeca(elementoAtual); // se isso me retornar algo eu criei um bloco e quero incrementar pro proximo
                 elementoAtual++;
                 //Debug.Log(elementoAtual);
@@ -159,21 +161,22 @@ public class Gabarito : MonoBehaviour
 
             Debug.Log("Elemento NÃO tem coordenada correspondente");
 
-            contadorMensagemNaoCorrespondente++;
-            if (contadorMensagemNaoCorrespondente >= 3)
+
+            gVida.health--;
+            if (gVida.health <= 0)
             {
                 gGameController.ShowGameOver();
             }
 
             //TODO deve deletar, mas voltar ele para a lista de blocos que serão spawnados
 
+            //TODO SE a linha estiver cheia, mas for o bloco errado não deve limpar!!!!
             // Apagar as linhas abaixo da linha atual
-            /*
             for (int i = (int)elemento.position.y; i > 0; i--)
             {
-                gGameManagerGrade.deletaQuadrado(i);
+                gGameManagerGrade.deletaLinhasErradas(i);
             }
-            */
+            return;
         }
         else
         {

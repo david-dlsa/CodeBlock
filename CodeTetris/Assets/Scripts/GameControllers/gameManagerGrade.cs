@@ -108,9 +108,29 @@ public class gameManagerGrade : MonoBehaviour {
 
         gGabarito.AtualizarCoordenadasY();
         gQuadroResultado.AtivarFilhoPorIndex(index);
-        //TODO ta chamando MUITAS vezes por conta de ser chamado no metodo gabaritoComparativo
-        //gQuadroResultado.PlaySFX();
+        gQuadroResultado.PlaySFX();
         gQuadroResultado.DecrementarIndicesFilhos();
+    }
+
+    public void deletaLinhasErradas(int y)
+    {
+        for (int x = 0; x < largura; x++)
+        {
+            if (grade[x, y] != null)
+            {
+                //bloco = grade[x, y].transform.parent.gameObject.GetComponent<ConstroiBloco>();
+                //textos += " " + bloco.texto;
+                Destroy(grade[x, y].transform.parent.gameObject);
+                grade[x, y] = null;
+            }
+            if (grade[x, (y + 1)] != null)
+            {
+                Destroy(grade[x, (y + 1)].transform.parent.gameObject);
+                grade[x, (y + 1)] = null;
+            }
+        }
+        //Som de erro
+        //gQuadroResultado.PlaySFX();
     }
 
     public void moveLinhaCima(int y)
