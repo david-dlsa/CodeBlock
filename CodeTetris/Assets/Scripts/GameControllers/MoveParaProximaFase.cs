@@ -7,16 +7,11 @@ public class MoveParaProximaFase : MonoBehaviour
 {
     public int nextSceneLoad;
 
-    SoundConfig gSoundConfig;
-    public AudioClip vitoriaSound;
-
     Gabarito gGabarito;
 
     // Start is called before the first frame update
     void Start()
     {
-        gSoundConfig = GetComponent<SoundConfig>();
-        vitoriaSound = gSoundConfig.vitoriaSound;
         nextSceneLoad = SceneManager.GetActiveScene().buildIndex + 1;
 
         gGabarito = GameObject.FindObjectOfType<Gabarito>();
@@ -31,9 +26,9 @@ public class MoveParaProximaFase : MonoBehaviour
         else
         {
             // Atraso de 2 segundos antes de chamar a função de carregamento da próxima cena
-            PlaySFX();
-            float delay = 1.5f;
-            Invoke("CarregarProximaCena", delay);
+            //float delay = 1.5f;
+            //Invoke("CarregarProximaCena", delay);
+            CarregarProximaCena();
 
         }
     }
@@ -51,12 +46,4 @@ public class MoveParaProximaFase : MonoBehaviour
         }
     }
 
-    public void PlaySFX()
-    {
-        vitoriaSound = gSoundConfig.limpaLinhaSound;
-        AudioSource audioSource = GetComponent<AudioSource>();
-        audioSource.volume = 0.7f; // Definir a altura do som
-        audioSource.priority = 255; // Definir uma prioridade alta
-        audioSource.PlayOneShot(vitoriaSound);
-    }
 }

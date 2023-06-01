@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static SeletorDeFase;
 
 public class gameController : MonoBehaviour
 {
     public GameObject gameOverPanel;
-    public int indexScene;
+    public GameObject winPanel;
+    public GameObject optionsPanel;
+    private int indexScene;
 
     public static gameController instance;
     gameManagerGrade gManagerGrade;
@@ -24,10 +28,24 @@ public class gameController : MonoBehaviour
         gGabarito = GameObject.FindObjectOfType<Gabarito>();
     }
 
-    public void ShowGameOver(){
-        gManagerGrade.pausarJogo();
-        gameOverPanel.SetActive(true);
-        Time.timeScale = 0;
+    public void ShowPanel(GameObject panel)
+    {
+        if (gManagerGrade != null)
+        {
+            gManagerGrade.pausarJogo();
+            Time.timeScale = 1;
+        }
+        panel.SetActive(true);
+    }
+
+    public void ClosePanel(GameObject panel)
+    {
+        if (gManagerGrade != null)
+        {
+            gManagerGrade.pausarJogo();
+            Time.timeScale = 1;
+        }
+        panel.SetActive(false);
     }
 
     public void RestartGame(){

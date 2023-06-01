@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -12,6 +13,7 @@ public class Gabarito : MonoBehaviour
 
     private int elementoAtual;
     public int indexLinhaAtual;
+    public string tituloFase;
     private int contadorMensagemNaoCorrespondente;
 
     private List<Transform> blocosRemovidos = new List<Transform>();
@@ -28,6 +30,9 @@ public class Gabarito : MonoBehaviour
     gameManagerGrade gGameManagerGrade;
     Vida gVida;
 
+    SoundConfig gSoundConfig;
+    public AudioClip vitoriaSound;
+
     void Start()
     {
 
@@ -35,6 +40,11 @@ public class Gabarito : MonoBehaviour
         gGameController = GameObject.FindObjectOfType<gameController>();
         gGameManagerGrade = GameObject.FindObjectOfType<gameManagerGrade>();
         gVida = GetComponent<Vida>();
+        gSoundConfig = GameObject.FindObjectOfType<SoundConfig>();
+
+        vitoriaSound = gSoundConfig.vitoriaSound;
+
+        AtualizarTituloPagina();
 
         elementoAtual = 0;
         linhaAtual = linhas[indexLinhaAtual];
@@ -75,7 +85,10 @@ public class Gabarito : MonoBehaviour
                     // Limpar o gabarito comparativo antes de iniciar a nova cena
                     LimparGabaritoComparativo();
 
-                    gMoveParaProximaFase.proximaCena();
+                    //Habilitar tela de vitoria
+                    gGameController.ShowPanel(gGameController.winPanel);
+                    PlaySFX();
+                    //gMoveParaProximaFase.proximaCena();
                     return;
                 }
                 linhaAtual = linhas[indexLinhaAtual];
@@ -165,7 +178,7 @@ public class Gabarito : MonoBehaviour
             gVida.health--;
             if (gVida.health <= 0)
             {
-                gGameController.ShowGameOver();
+                gGameController.ShowPanel(gGameController.gameOverPanel);
             }
 
             //TODO deve deletar, mas voltar ele para a lista de blocos que serão spawnados
@@ -190,6 +203,25 @@ public class Gabarito : MonoBehaviour
     public void LimparGabaritoComparativo()
     {
         hashComparativo.Clear();
+    }
+
+
+    public void PlaySFX()
+    {
+        vitoriaSound = gSoundConfig.vitoriaSound;
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.volume = 0.7f; // Definir a altura do som
+        audioSource.priority = 255; // Definir uma prioridade alta
+        audioSource.PlayOneShot(vitoriaSound);
+    }
+
+    private void AtualizarTituloPagina()
+    {
+        GameObject objTituloFase = GameObject.FindWithTag("tituloFase");
+        if (objTituloFase != null)
+        {
+            objTituloFase.GetComponent<TextMeshPro>().text = tituloFase;
+        }
     }
 
 }
