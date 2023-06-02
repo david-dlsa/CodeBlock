@@ -24,6 +24,10 @@ public class tetroMov : MonoBehaviour
 
     ConstroiBloco gConstroiBloco;
 
+    AudioManager gAudioManager;
+
+    gameController gGameController;
+
     // Use this for initialization
     void Start()
     {
@@ -35,6 +39,8 @@ public class tetroMov : MonoBehaviour
         gSpawner = GameObject.FindObjectOfType<spawnTetro>();
         gGabarito = GameObject.FindObjectOfType<Gabarito>();
         gConstroiBloco = GetComponent<ConstroiBloco>();
+        gAudioManager = GameObject.FindObjectOfType<AudioManager>();
+        gGameController = GameObject.FindObjectOfType<gameController>();
     }
 
     // Update is called once per frame
@@ -121,14 +127,14 @@ public class tetroMov : MonoBehaviour
 
                     if (gManagerGrade.abaixoGrade(this)){
                         Debug.Log("GAME OVER (up):" + gManagerGrade.abaixoGrade(this));
-                        //gController.ShowGameOver();
+                        gGameController.ShowPanel(gGameController.gameOverPanel);
                     }
                     else{
-                    gConstroiBloco.PlaySFXWithDuration(gConstroiBloco.conectadoSound);
                     gManagerGrade.score += 10;
                     enabled = false;
                     gGabarito.gabaritoComparativo(this.transform); //verifica se o bloco esta na posiçao correta
                     gGabarito.gerarBlocoLinha();
+                    //gAudioManager.PlaySFX(gAudioManager.conectadoSound);
                     }
                 }
                 //queda = Time.time;
@@ -146,14 +152,14 @@ public class tetroMov : MonoBehaviour
 
                     if (gManagerGrade.abaixoGrade(this)){
                         Debug.Log("GAME OVER (auto):" + gManagerGrade.abaixoGrade(this));
-                        //gController.ShowGameOver();
+                        gGameController.ShowPanel(gGameController.gameOverPanel);
                     }
                     else{
-                    gConstroiBloco.PlaySFXWithDuration(gConstroiBloco.conectadoSound);
                     gManagerGrade.score += 10;
                     enabled = false;
                     gGabarito.gabaritoComparativo(this.transform); //verifica se o bloco esta na posiçao correta
                     gGabarito.gerarBlocoLinha();
+                    //gAudioManager.PlaySFX(gAudioManager.conectadoSound);
                     }
                 }
                 queda = Time.time;

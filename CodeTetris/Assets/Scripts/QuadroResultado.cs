@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class QuadroResultado : MonoBehaviour
 {
-
-    public AudioClip limpaLinhaSound;
-
-    SoundConfig gSoundConfig;
+    AudioManager gAudioManager;
 
     void Start()
     {
-        gSoundConfig = GameObject.FindObjectOfType<SoundConfig>();
-
-        limpaLinhaSound = gSoundConfig.limpaLinhaSound;
+        gAudioManager = GameObject.FindObjectOfType<AudioManager>();
     }
 
     public void AtivarFilhoPorIndex(int indexResultado)
@@ -49,16 +44,6 @@ public class QuadroResultado : MonoBehaviour
             LinhaResultado LinhaResultado = filho.GetComponent<LinhaResultado>();
             LinhaResultado.index--;
         }
-    }
-
-    public void PlaySFX()
-    {
-        limpaLinhaSound = gSoundConfig.limpaLinhaSound;
-        AudioSource audioSource = GetComponent<AudioSource>();
-        audioSource.volume = 0.3f; // Definir a altura do som
-        audioSource.PlayOneShot(limpaLinhaSound);
-        // StartCoroutine(StopSFXAfterDuration(audioSource, 0.5f));
-
     }
 
     private IEnumerator StopSFXAfterDuration(AudioSource audioSource, float duration)

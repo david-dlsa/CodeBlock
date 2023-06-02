@@ -30,8 +30,7 @@ public class Gabarito : MonoBehaviour
     gameManagerGrade gGameManagerGrade;
     Vida gVida;
 
-    SoundConfig gSoundConfig;
-    public AudioClip vitoriaSound;
+    AudioManager gAudioManager;
 
     void Start()
     {
@@ -40,9 +39,7 @@ public class Gabarito : MonoBehaviour
         gGameController = GameObject.FindObjectOfType<gameController>();
         gGameManagerGrade = GameObject.FindObjectOfType<gameManagerGrade>();
         gVida = GetComponent<Vida>();
-        gSoundConfig = GameObject.FindObjectOfType<SoundConfig>();
-
-        vitoriaSound = gSoundConfig.vitoriaSound;
+        gAudioManager = GameObject.FindObjectOfType<AudioManager>();
 
         AtualizarTituloPagina();
 
@@ -87,7 +84,7 @@ public class Gabarito : MonoBehaviour
 
                     //Habilitar tela de vitoria
                     gGameController.ShowPanel(gGameController.winPanel);
-                    PlaySFX();
+                    gAudioManager.PlaySFX(gAudioManager.vitoriaSound);
                     //gMoveParaProximaFase.proximaCena();
                     return;
                 }
@@ -169,6 +166,7 @@ public class Gabarito : MonoBehaviour
             {
                 listaB.Add(elemento); // Adicionar o elemento atual à listaB
                 Debug.Log("Elemento TEM coordenada correspondente");
+                gAudioManager.PlaySFX(gAudioManager.conectadoSound);
                 return;
             }
 
@@ -179,12 +177,15 @@ public class Gabarito : MonoBehaviour
             if (gVida.health <= 0)
             {
                 gGameController.ShowPanel(gGameController.gameOverPanel);
+                gAudioManager.PlaySFX(gAudioManager.derrotaSound);
+
             }
 
             //TODO deve deletar, mas voltar ele para a lista de blocos que serão spawnados
 
             //TODO SE a linha estiver cheia, mas for o bloco errado não deve limpar!!!!
             // Apagar as linhas abaixo da linha atual
+            gAudioManager.PlaySFX(gAudioManager.erradoSound);
             for (int i = (int)elemento.position.y; i > 0; i--)
             {
                 gGameManagerGrade.deletaLinhasErradas(i);
@@ -205,15 +206,6 @@ public class Gabarito : MonoBehaviour
         hashComparativo.Clear();
     }
 
-
-    public void PlaySFX()
-    {
-        vitoriaSound = gSoundConfig.vitoriaSound;
-        AudioSource audioSource = GetComponent<AudioSource>();
-        audioSource.volume = 0.7f; // Definir a altura do som
-        audioSource.priority = 255; // Definir uma prioridade alta
-        audioSource.PlayOneShot(vitoriaSound);
-    }
 
     private void AtualizarTituloPagina()
     {

@@ -18,11 +18,13 @@ public class gameManagerGrade : MonoBehaviour {
 
     QuadroResultado gQuadroResultado;
     Gabarito gGabarito;
+    AudioManager gAudioManager;
 
     void Start()
     {
         gQuadroResultado = GameObject.FindObjectOfType<QuadroResultado>();
         gGabarito = GameObject.FindObjectOfType<Gabarito>();
+        gAudioManager = GameObject.FindObjectOfType<AudioManager>();
     }
 
     void Update(){
@@ -108,7 +110,7 @@ public class gameManagerGrade : MonoBehaviour {
 
         gGabarito.AtualizarCoordenadasY();
         gQuadroResultado.AtivarFilhoPorIndex(index);
-        gQuadroResultado.PlaySFX();
+        gAudioManager.PlaySFX(gAudioManager.limpaLinhaSound);
         gQuadroResultado.DecrementarIndicesFilhos();
     }
 
@@ -129,8 +131,6 @@ public class gameManagerGrade : MonoBehaviour {
                 grade[x, (y + 1)] = null;
             }
         }
-        //Som de erro
-        //gQuadroResultado.PlaySFX();
     }
 
     public void moveLinhaCima(int y)

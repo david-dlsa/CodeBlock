@@ -15,21 +15,8 @@ public class ConstroiBloco : MonoBehaviour
     private string nomeDoObjeto = "partCode";
     private string tagDoObjeto = "partCode";
 
-    public AudioClip conectadoSound;
-    public AudioClip erradoSound;
-    public AudioClip limpaLinhaSound;
-
-    SoundConfig gSoundConfig;
-
     void Start()
     {
-        gSoundConfig = GameObject.FindObjectOfType<SoundConfig>();
-
-        conectadoSound = gSoundConfig.conectadoSound;
-        erradoSound = gSoundConfig.erradoSound;
-
-        CarregarAudios();
-
         ConstruirBloco();
     }
 
@@ -88,21 +75,5 @@ public class ConstroiBloco : MonoBehaviour
         float fontSize = tamanhoDesejado / menorLado;
         textMeshPro.fontSize = fontSize;
 
-        // Define SFX
-        conectadoSound = gSoundConfig.conectadoSound;
-        erradoSound = gSoundConfig.erradoSound;
-    }
-
-    public void PlaySFXWithDuration(AudioClip sfx)
-    {
-        AudioSource audioSource = GetComponent<AudioSource>();
-        audioSource.PlayOneShot(sfx);
-    }
-
-    void CarregarAudios()
-    {
-        conectadoSound = Resources.Load<AudioClip>("CasualGameSounds/DM-CGS-03");
-        erradoSound = Resources.Load<AudioClip>("CasualGameSounds/DM-CGS-02");
-        limpaLinhaSound = Resources.Load<AudioClip>("CasualGameSounds/DM-CGS-24");
     }
 }

@@ -323,7 +323,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1266896852483600863, guid: 8ab284b5214534699984acce51873626, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1266896852483600863, guid: 8ab284b5214534699984acce51873626, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -352,7 +352,7 @@ PrefabInstance:
     - target: {fileID: 1266896852483600863, guid: 8ab284b5214534699984acce51873626, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgument
       value: 
-      objectReference: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 1266896852483600863, guid: 8ab284b5214534699984acce51873626, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
@@ -882,10 +882,11 @@ MonoBehaviour:
   GameBackground: {fileID: 8300000, guid: 7a31c6edefa2b194c87bf493321cc011, type: 3}
   MenuBackground: {fileID: 8300000, guid: f091397f85ca09143b2307d452aa8bf7, type: 3}
   BtnClick: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
-  conectadoSound: {fileID: 0}
-  erradoSound: {fileID: 0}
-  limpaLinhaSound: {fileID: 0}
-  vitoriaSound: {fileID: 0}
+  conectadoSound: {fileID: 8300000, guid: b3f210289cf8f4473a7e2fcf62618a29, type: 3}
+  erradoSound: {fileID: 8300000, guid: 820931fb511624737beb248c33a8b77e, type: 3}
+  limpaLinhaSound: {fileID: 8300000, guid: 52320e590bf774734a288886eba557ba, type: 3}
+  vitoriaSound: {fileID: 8300000, guid: 2667a0a008b044e218b63df62e2be749, type: 3}
+  derrotaSound: {fileID: 8300000, guid: b9eff218e132a4e76be78840eca96fb2, type: 3}
 --- !u!4 &925188934
 Transform:
   m_ObjectHideFlags: 0
@@ -937,7 +938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 418415244106283966, guid: b7fa7084e11094e0ab03dace7ec6399b, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.46
+      value: 0.459946
       objectReference: {fileID: 0}
     - target: {fileID: 418415244106283966, guid: b7fa7084e11094e0ab03dace7ec6399b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1005,7 +1006,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5561035104518377888, guid: b7fa7084e11094e0ab03dace7ec6399b, type: 3}
       propertyPath: m_Value
-      value: 0.0001
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5561035104518377888, guid: b7fa7084e11094e0ab03dace7ec6399b, type: 3}
       propertyPath: m_MinValue
@@ -1700,6 +1701,14 @@ PrefabInstance:
       value: -185.12
       objectReference: {fileID: 0}
     - target: {fileID: 6175452041319721269, guid: b7fa7084e11094e0ab03dace7ec6399b, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6175452041319721269, guid: b7fa7084e11094e0ab03dace7ec6399b, type: 3}
+      propertyPath: m_MinValue
+      value: 0.0001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6175452041319721269, guid: b7fa7084e11094e0ab03dace7ec6399b, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -1729,7 +1738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6197414310906779036, guid: b7fa7084e11094e0ab03dace7ec6399b, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.46
+      value: 0.459946
       objectReference: {fileID: 0}
     - target: {fileID: 6197414310906779036, guid: b7fa7084e11094e0ab03dace7ec6399b, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1737,7 +1746,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6197414310906779036, guid: b7fa7084e11094e0ab03dace7ec6399b, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.46
+      value: 0.459946
       objectReference: {fileID: 0}
     - target: {fileID: 6197414310906779036, guid: b7fa7084e11094e0ab03dace7ec6399b, type: 3}
       propertyPath: m_AnchorMin.y
