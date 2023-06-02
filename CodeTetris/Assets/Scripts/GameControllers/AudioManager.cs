@@ -12,6 +12,11 @@ public class AudioManager : MonoBehaviour
     [Header("--- Audio Source ---")]
     public AudioClip GameBackground;
     public AudioClip MenuBackground;
+    public AudioClip BtnClick;
+    public AudioClip conectadoSound; // Arquivo de áudio para quando estiver conectado
+    public AudioClip erradoSound; // Arquivo de áudio para quando estiver errado
+    public AudioClip limpaLinhaSound; // Arquivo de áudio para quando limpar linha
+    public AudioClip vitoriaSound; // Arquivo de áudio para quando ganhar
 
     public static AudioManager instance;
 
