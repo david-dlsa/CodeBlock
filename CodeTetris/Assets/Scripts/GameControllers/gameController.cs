@@ -52,6 +52,11 @@ public class gameController : MonoBehaviour
         SceneManager.LoadScene(indexScene);
     }
 
+    public void FecharJogo()
+    {
+        Application.Quit();
+    }
+
     public void OpenScene(int index)
     {
         if(gGabarito != null){

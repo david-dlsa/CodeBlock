@@ -21,6 +21,9 @@ public class SeletorDeFase : MonoBehaviour
 
     public int numPaginas = 1;
 
+    public GameObject loadingScreen;
+    public Image loadingBarFill;
+
     [System.Serializable]
     public struct Pagina
     {
@@ -46,9 +49,9 @@ public class SeletorDeFase : MonoBehaviour
 
         int levelAtual = PlayerPrefs.GetInt("levelAt", 2);
 
-        for(int i = 0; i < lvlButtons.Length; i++)
+        for (int i = 0; i < lvlButtons.Length; i++)
         {
-            if(i + 2 > levelAtual)
+            if (i + 2 > levelAtual)
             {
                 lvlButtons[i].interactable = false;
                 TextMeshProUGUI text = lvlButtons[i].GetComponentInChildren<TextMeshProUGUI>();
@@ -93,7 +96,20 @@ public class SeletorDeFase : MonoBehaviour
 
     public void OpenScene(int index)
     {
-        SceneManager.LoadScene(index);
+        StartCoroutine(LoadSceneAsync(index));
+    }
+
+    private IEnumerator LoadSceneAsync(int sceneId)
+    {
+        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneId);
+        loadingScreen.SetActive(true);
+
+        while (!operation.isDone)
+        {
+            float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
+            loadingBarFill.fillAmount = progressValue;
+            yield return null;
+        }
     }
 
     public void AvancaPaginaMenu()
@@ -134,7 +150,6 @@ public class SeletorDeFase : MonoBehaviour
         {
             avancaPaginaButton.gameObject.GetComponent<Image>().sprite = spriteInativoSeta;
         }
-
     }
 
     public void VoltaPaginaMenu()
@@ -162,7 +177,6 @@ public class SeletorDeFase : MonoBehaviour
 
             // Decrementa 6 em fasesPorPagina
             fasesPorPagina -= 6;
-
 
             AtualizarBotoesPagina();
         }
@@ -198,21 +212,19 @@ public class SeletorDeFase : MonoBehaviour
         {
             // Ativa o botão de avançar página
             avancaPaginaButton.gameObject.SetActive(true);
-
         }
+
         // Verifica se está na primeira página
         if (currentPageIndex == 0)
         {
             // Desativa o botão de voltar página
             voltaPaginaButton.gameObject.SetActive(false);
-            }
+        }
         else
         {
             // Ativa o botão de voltar página
             voltaPaginaButton.gameObject.SetActive(true);
         }
-
-
     }
 
     // Atualiza as informações salvas no PlayerPrefs ao fechar o jogo
