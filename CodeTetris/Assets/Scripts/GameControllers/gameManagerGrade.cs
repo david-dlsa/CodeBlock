@@ -122,6 +122,8 @@ public class gameManagerGrade : MonoBehaviour {
             {
                 //bloco = grade[x, y].transform.parent.gameObject.GetComponent<ConstroiBloco>();
                 //textos += " " + bloco.texto;
+                //TODO Desabilitar elemento
+
                 Destroy(grade[x, y].transform.parent.gameObject);
                 grade[x, y] = null;
             }
