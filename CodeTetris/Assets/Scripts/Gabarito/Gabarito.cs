@@ -4,6 +4,7 @@ using System.Linq;
 using System.Xml.Linq;
 using TMPro;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -11,13 +12,11 @@ public class Gabarito : MonoBehaviour
 {
     public LinhaGabarito[] linhas;
 
-    private int elementoAtualIndex;
     public int indexLinhaAtual;
     public string tituloFase;
 
     private List<Transform> blocosRemovidos = new List<Transform>();
 
-    LinhaGabarito linhaAtual;
     List<Transform> listaB;
 
     // Dicionário para armazenar o gabarito comparativo
@@ -45,9 +44,7 @@ public class Gabarito : MonoBehaviour
         AtualizarTituloPagina();
 
         indexLinhaAtual = 0;
-        elementoAtualIndex = 0;
         matriz = MontarMatriz();
-        linhaAtual = linhas[indexLinhaAtual];
         gerarBlocoLinha();
 
         // Inicializa o dicionário
@@ -72,11 +69,11 @@ public class Gabarito : MonoBehaviour
             for (int i = 0; i < linha.elementos.Length; i++)
             {
                 cloneID++;
-                string nomeBloco = linha.elementos[i].gameObject.name;
-                nomeBloco = linha.elementos[i].gameObject.name + "(clone)" + cloneID;
+                string nomeBloco = linha.elementos[i].gameObject.name + "(clone)" + cloneID;
                 bool spawnDisponivel = linhaIndex == 0 && i == 0; // Apenas o primeiro elemento da primeira linha é true
                 bool foiUtilizado = false;
-                linhaArray[i] = new ElementoMatriz(nomeBloco, i, spawnDisponivel, linhaIndex, foiUtilizado);
+                int largura = linha.elementos[i].gameObject.GetComponent<ConstroiBloco>().largura;
+                linhaArray[i] = new ElementoMatriz(nomeBloco, i, spawnDisponivel, linhaIndex, foiUtilizado, largura);
             }
 
             matriz.Add(linhaArray);
@@ -88,11 +85,12 @@ public class Gabarito : MonoBehaviour
     // Método para gerar os blocos com base na matriz
     public void gerarBlocoLinha()
     {
-        // Chamar o método IterarDuasLinhasPorVez e atribuir o resultado a uma variável (elementosDisponiveis e indexLinha)
-        List<ElementoMatriz> elementosDisponiveis = IterarDuasLinhasPorVez(matriz);
+        // Chamar o método ListaElementosDisponiveis e retorna a lista de elementos disponiveis 
+        List<ElementoMatriz> elementosDisponiveis = ListaElementosDisponiveis(matriz);
+
         for (int i = 0; i < elementosDisponiveis.Count; i++)
         {
-            Debug.LogError(i + " - Elemento: "+ elementosDisponiveis[i].nome + ' ' + elementosDisponiveis[i].valor + ' ' + elementosDisponiveis[i].indexLinha);
+            Debug.LogError(i + " - Elemento: " + elementosDisponiveis[i].nome + ' ' + elementosDisponiveis[i].valor + ' ' + elementosDisponiveis[i].indexLinha);
             Debug.LogError("======================================");
         }
 
@@ -111,7 +109,7 @@ public class Gabarito : MonoBehaviour
         }
         else
         {
-            // Não há elementos disponíveis na lista, fazer algo de acordo com a lógica do seu programa
+            // Não há elementos disponíveis na lista, logo todos os blocos do gabarito já foram
             Debug.LogError("Não há elementos disponíveis para criar a peça!");
             Debug.LogError("Todas as linhas da matriz já foram percorridas!");
             gGameController.ShowPanel(gGameController.winPanel);
@@ -119,14 +117,13 @@ public class Gabarito : MonoBehaviour
         }
     }
 
-    // Retorna a primeira linha da matiz com ao menos um elemento disponivel
     private int getLinhaDisponivel()
     {
-
+        // Retorna a primeira linha da matiz com ao menos um elemento disponivel
         return matriz.FindIndex(linha => linha.Any(e => e.spawnDisponivel));
     }
 
-    private List<ElementoMatriz> IterarDuasLinhasPorVez(List<ElementoMatriz[]> matriz)
+    private List<ElementoMatriz> ListaElementosDisponiveis(List<ElementoMatriz[]> matriz)
     {
         List<ElementoMatriz> elementosDisponiveis = new List<ElementoMatriz>();
 
@@ -175,15 +172,15 @@ public class Gabarito : MonoBehaviour
         return elementosDisponiveis;
     }
 
-    private void liberaProximaPeca(int indexLinha, int indexUltimoDisponivel)
+    private void liberaProximaPeca(int indexLinha)
     {
-        // verificar se náo vai tampar a peca da linha anteior
-        // verificar se náo vai extrapolar a quantidade de intens na linha
+        // verificar se nao vai extrapolar a quantidade de itens na linha
         int indexLinhaAnterior;
         if (indexLinha != 0 && !matriz[indexLinha -1].All(elemento => elemento.foiUtilizado))
         {
             indexLinhaAnterior = Array.FindLastIndex(matriz[indexLinha - 1], e => e.spawnDisponivel);
-        } else
+        } 
+        else
         {
             indexLinhaAnterior = indexLinha + 99;
         }
@@ -194,11 +191,13 @@ public class Gabarito : MonoBehaviour
         // libera a peca seguinte
         if (indexProximaPeca < matriz[indexLinha].Length)
         {
-            // verifica se a peca seguinte nao cobre a anterior
-            if (indexProximaPeca < indexLinhaAnterior)
+            //TODO um jeito de acessar todos os elementos da linha que estão com foiUtilizado == true calculando a soma da largura deles e comparando cm o item da largura atual se der maior que da linha anterior nao pode
+            // verifica se a peca seguinte nao cobre a anterior e se a linha atual é maior que a anterior
+            if (CompararLarguras(indexLinha, matriz[indexLinha][indexProximaPeca].largura))
             {
                 // Liber a peca seguinte
                 matriz[indexLinha][indexProximaPeca].spawnDisponivel = true;
+                //Debug.Log("Libera caso elemento NAO CUBRA elemento da linha anterior");
             }
         } // NAO PEGAR SE A LINHA JA TYA CONCLUIDA
     }
@@ -211,50 +210,49 @@ public class Gabarito : MonoBehaviour
         ElementoMatriz elementoEncontrado = Array.Find(linhaArray, e => e.nome == elemento.nome);
         if (elementoEncontrado != null)
         {
+            // Define a primeira linha encontrada que a bloco com spawn disponivel
             int primeiraLinhaDisponivel = getLinhaDisponivel();
 
+            // Todos com foiUtilizado igual a true não devem virar spawnDisponivel == true
             elementoEncontrado.spawnDisponivel = false;
             elementoEncontrado.foiUtilizado = true;
-            
-            // Se a primeira linha disponivel encontrada for igual ao index do elemento na linha
+
+            // Se a primeira linha disponivel encontrada for igual ao index da linha do elemento atual
             if (primeiraLinhaDisponivel == indexLinha)
             {
-                // libera a peca seguinte na linha de mesmo index do elemento
+                // libera a peca seguinte na linha de mesmo index do elemento se tiver proximo elemento na linha
                 if (elemento.valor + 1 <= matriz[indexLinha].Length - 1)
                 {
+                    //Debug.Log("Libera PROX elemento na MESMA linha");
                     matriz[indexLinha][elemento.valor + 1].spawnDisponivel = true;
 
-                }
-                bool naoBloqueiaPeca = indexLinha != 0 ? (matriz[indexLinha].Length > matriz[indexLinha - 1].Length || matriz[indexLinha].All(e => e.foiUtilizado)) : true;
+                }// Se o index da linha não for 0 verificar se a linha atual é maior do que a anterior
+                //bool naoBloqueiaPeca = indexLinha != 0 ? (matriz[indexLinha].Length > matriz[indexLinha - 1].Length || matriz[indexLinha].All(e => e.foiUtilizado)) : true;
                 // libera a peca na mesma posicao da proxima linha se existir uma proxima linha na matriz
-                if (indexLinha + 1 <= matriz.Count - 1 && naoBloqueiaPeca)
+                if (indexLinha + 1 <= matriz.Count - 1)
                 {
-                    liberaProximaPeca(indexLinha + 1, primeiraLinhaDisponivel);
+                    liberaProximaPeca(indexLinha + 1);
                 }
 
             } else
             {
-                // verifica se há um proximo elemento an linha
+                // verifica se há um proximo elemento na linha
                 // verifica se a quantidade de elementos na linha atual é maior do que a linha anterior (Impendindo bloqueio de peças)
-                if (elemento.valor + 1 <= matriz[indexLinha].Length - 1 && matriz[indexLinha].Length > matriz[indexLinha - 1].Length)
+                if (elemento.valor + 1 <= matriz[indexLinha].Length - 1)
                 {
                     int indexElementoLinhaAnterior = Array.FindLastIndex(matriz[primeiraLinhaDisponivel], e => e.spawnDisponivel);
 
                     // verifica se a peca seguinte nao cobre a anterior
-                    if (elemento.valor + 1 < indexElementoLinhaAnterior)
+                    if (CompararLarguras(indexLinha, matriz[indexLinha][elemento.valor + 1].largura))
                     {
                         // Liber a peca seguinte
+                        //Debug.Log("Libera PROX elemento na MESMA linha");
                         matriz[indexLinha][elemento.valor + 1].spawnDisponivel = true;
                     }
 
                 }
             }
         }
-        // verificar a linha anterior foi colocada
-        //  se foi:
-        //      - libera elemento proxima linha
-        //  se nao foi?:
-        //      - nao faz nada
     }
 
         public void AtualizarCoordenadasY()
@@ -353,7 +351,11 @@ public class Gabarito : MonoBehaviour
 
             //TODO criar metodo para deletar linhas logicas, definindo todas elas como não utilizado e definir o primeiro
             //elemento da linha que errou como spawnDisponivel
-            for (int i = (int)elemento.position.y; i > 0; i--)
+            int indexLinhaMatriz = matriz.FindIndex(linha => linha.Any(e => e.nome == elemento.name));
+            //limparLinhasLogicas(indexLinhaMatriz);
+
+            int indexPrimeiraLinhaVisualExcluivel = 18 - (indexLinhaMatriz * 2);
+            for (int i = indexLinhaMatriz; i > 0; i--)
             {
                 gGameManagerGrade.deletaLinhasErradas(i);
             }
@@ -368,10 +370,42 @@ public class Gabarito : MonoBehaviour
         // ...
     }
 
-
     public void LimparGabaritoComparativo()
     {
         hashComparativo.Clear();
+    }
+
+    private bool CompararLarguras(int indexLinha, int larguraProximoElemento)
+    {
+        ElementoMatriz[] linhaAnterior = matriz[indexLinha - 1];
+        ElementoMatriz[] linhaAtual = matriz[indexLinha];
+
+        int larguraLinhaAnterior = CalcularSomaLargura(linhaAnterior);
+        int larguraLinhaAtual = CalcularSomaLargura(linhaAtual);
+
+        if (larguraLinhaAtual + larguraProximoElemento > larguraLinhaAnterior)
+        {
+            Console.WriteLine("A largura da linha atual é maior do que a largura da linha anterior.");
+            return false;
+        }
+        else
+        {
+            Console.WriteLine("A largura da linha atual é menor do que a largura da linha anterior.");
+            return true;
+        }
+    }
+
+    private int CalcularSomaLargura(ElementoMatriz[] linha)
+    {
+        int somaLargura = 0;
+        foreach (ElementoMatriz elemento in linha)
+        {
+            if (elemento.foiUtilizado)
+            {
+                somaLargura += elemento.largura;
+            }
+        }
+        return somaLargura;
     }
 
 

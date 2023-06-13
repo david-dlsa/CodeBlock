@@ -61,10 +61,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80b00bd2ff5838042bdf1056a10a42e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  largura: 4
+  largura: 3
   quadradoPrefab: {fileID: 2121465023118366669, guid: 80cbef634f814d0418b98141aa5b59c8, type: 3}
   sprite: {fileID: 21300000, guid: 438b57cebedb577418e915f7c1d3879f, type: 3}
   texto: escreva
-  x: 3
+  x: 2
   y: 2
   tamanhoMaximo: 8

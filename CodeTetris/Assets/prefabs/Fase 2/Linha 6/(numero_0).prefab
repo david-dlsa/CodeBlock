@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &850304543331467430
+--- !u!1 &304633069090830332
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 850304543331467427}
-  - component: {fileID: 850304543331467428}
-  - component: {fileID: 850304543331467429}
+  - component: {fileID: 304633069090830329}
+  - component: {fileID: 304633069090830334}
+  - component: {fileID: 304633069090830335}
   m_Layer: 0
-  m_Name: "(_O n\xFAmero \xE9 negativo_)"
+  m_Name: (numero_0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &850304543331467427
+--- !u!4 &304633069090830329
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 850304543331467430}
+  m_GameObject: {fileID: 304633069090830332}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -32,13 +32,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &850304543331467428
+--- !u!114 &304633069090830334
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 850304543331467430}
+  m_GameObject: {fileID: 304633069090830332}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f42a613fd74774546ac280081dae60d2, type: 3}
@@ -49,22 +49,22 @@ MonoBehaviour:
   queda: 0
   velocidade: 0.1
   timer: 0
---- !u!114 &850304543331467429
+--- !u!114 &304633069090830335
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 850304543331467430}
+  m_GameObject: {fileID: 304633069090830332}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 80b00bd2ff5838042bdf1056a10a42e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  largura: 8
+  largura: 9
   quadradoPrefab: {fileID: 2121465023118366669, guid: 80cbef634f814d0418b98141aa5b59c8, type: 3}
-  sprite: {fileID: 21300000, guid: 0de5d50f8af6c8f4faf906e0479915ed, type: 3}
-  texto: "(\"O n\xFAmero \xE9 negativo\")"
+  sprite: {fileID: 21300000, guid: ab818b6babe60b746af553974e3f9c5a, type: 3}
+  texto: (numero>0)
   x: 10
-  y: 2
-  tamanhoMaximo: 6
+  y: 4
+  tamanhoMaximo: 8
