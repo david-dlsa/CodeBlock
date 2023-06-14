@@ -34,6 +34,12 @@ public class MoveParaProximaFase : MonoBehaviour
         AsyncOperation operation = SceneManager.LoadSceneAsync(nextSceneLoad);
         loadingScreen.SetActive(true);
 
+        // Definindo o valor do índice
+        if (nextSceneLoad > PlayerPrefs.GetInt("levelAt"))
+        {
+            PlayerPrefs.SetInt("levelAt", nextSceneLoad);
+        }
+
         while (!operation.isDone)
         {
             float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
@@ -41,10 +47,6 @@ public class MoveParaProximaFase : MonoBehaviour
             yield return null;
         }
 
-        // Definindo o valor do índice
-        if (nextSceneLoad > PlayerPrefs.GetInt("levelAt"))
-        {
-            PlayerPrefs.SetInt("levelAt", nextSceneLoad);
-        }
+        
     }
 }

@@ -7,6 +7,7 @@ using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class Gabarito : MonoBehaviour
 {
@@ -112,6 +113,11 @@ public class Gabarito : MonoBehaviour
             // Não há elementos disponíveis na lista, logo todos os blocos do gabarito já foram
             Debug.LogError("Não há elementos disponíveis para criar a peça!");
             Debug.LogError("Todas as linhas da matriz já foram percorridas!");
+            // Definindo o valor do índice
+            if (gMoveParaProximaFase.nextSceneLoad > PlayerPrefs.GetInt("levelAt"))
+            {
+                PlayerPrefs.SetInt("levelAt", gMoveParaProximaFase.nextSceneLoad);
+            }
             gGameController.ShowPanel(gGameController.winPanel);
             gAudioManager.PlaySFX(gAudioManager.vitoriaSound);
         }
@@ -127,46 +133,9 @@ public class Gabarito : MonoBehaviour
     {
         List<ElementoMatriz> elementosDisponiveis = new List<ElementoMatriz>();
 
-        int linha1Index = getLinhaDisponivel();
-        //Debug.LogError("Linha index" + linha1Index);
-        int linha2Index = linha1Index + 1;
-
-        while (linha1Index != - 1 && linha1Index <= matriz.Count - 1 && matriz[linha1Index].Any(e => e.spawnDisponivel))
+        foreach (ElementoMatriz[] linha in matriz)
         {
-            ElementoMatriz[] linha1 = matriz[linha1Index];
-            // Verificar quais elementos estão disponíveis na linha 1
-            List<ElementoMatriz> elementosDisponiveisLinha1 = linha1.Where(elemento => elemento.spawnDisponivel).ToList();
-            elementosDisponiveis.AddRange(elementosDisponiveisLinha1);
-
-            if(linha2Index <= matriz.Count - 1)
-            {
-                ElementoMatriz[] linha2 = matriz[linha2Index];
-                // Verificar quais elementos estão disponíveis na linha 2
-                List<ElementoMatriz> elementosDisponiveisLinha2 = linha2.Where(elemento => elemento.spawnDisponivel).ToList();
-                // Unificar elementos disponíveis das duas linhas  
-                elementosDisponiveis.AddRange(elementosDisponiveisLinha2);
-            }
-
-            // Verificar se todos os elementos da linha 1 foram utilizados
-            bool todosUtilizadosLinha1 = linha1.All(elemento => elemento.foiUtilizado);
-
-            // Avançar para a próxima iteração apenas se todos os elementos da linha1 foram utilizados
-            if (todosUtilizadosLinha1)
-            {
-            /*    linha1Index++;
-                linha2Index++;*/
-            }
-            else
-            {
-                break;
-            }
-        }
-
-        if (linha1Index >= matriz.Count)
-        {
-            Debug.LogError("Todas as linhas da matriz já foram percorridas!");
-            gGameController.ShowPanel(gGameController.winPanel);
-            gAudioManager.PlaySFX(gAudioManager.vitoriaSound);
+            elementosDisponiveis.AddRange(linha.Where(elemento => elemento.spawnDisponivel));
         }
 
         return elementosDisponiveis;
