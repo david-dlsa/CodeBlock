@@ -11,24 +11,24 @@ public class LinhaGabarito : MonoBehaviour
     public int indexElementoAtual = 0;
     public int countElementoAtual = 0;
 
-    private int cloneID = 0;
+    Gabarito gGabarito;
 
     // Use this for initialization
     void Start()
     {
+        gGabarito = GetComponent<Gabarito>();
 
+        int cloneID = 0;
         // Cria uma lista auxiliar com os elementos da linha atual
         countElementoAtual = elementos.Length;
-        CriarPeca(indexElementoAtual);
+        CriarPeca(indexElementoAtual, gGabarito.matriz[0][0].nome);
     }
 
-    public void CriarPeca(int indexElementoAtual)
+    public void CriarPeca(int indexElementoAtual, string elementoNome)
     {
             // Instancia uma peça a partir do elemento selecionado
-            cloneID++;
             GameObject clone = Instantiate(elementos[indexElementoAtual].gameObject, transform.position, Quaternion.identity);
-            clone.name = clone.name + cloneID;
+            clone.name = elementoNome;
 
-       
     }
 }

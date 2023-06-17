@@ -108,6 +108,7 @@ public class gameManagerGrade : MonoBehaviour {
         }
         int index = (18 - y)/2;
 
+        gGabarito.indexLinhaMatriz--;
         gGabarito.AtualizarCoordenadasY();
         gQuadroResultado.AtivarFilhoPorIndex(index);
         gAudioManager.PlaySFX(gAudioManager.limpaLinhaSound);
@@ -224,6 +225,35 @@ public class gameManagerGrade : MonoBehaviour {
             pause = true;
         }
 
+    }
+
+    public int CountUniqueParentObjectsInLine(int lineIndex, int elementIndex)
+    {
+        int totalWidth = 0;
+
+        HashSet<Transform> uniqueParents = new HashSet<Transform>(); // Armazena os objetos pais únicos encontrados
+
+        for (int x = 0; x <= elementIndex; x++)
+        {
+            if (gameManagerGrade.grade[x, lineIndex] != null)
+            {
+                Transform parent = gameManagerGrade.grade[x, lineIndex].transform.parent;
+                if (!uniqueParents.Contains(parent))
+                {
+                    // Adiciona a largura do objeto atual à largura total percorrida
+                    totalWidth += parent.gameObject.GetComponent<ConstroiBloco>().largura;
+                    uniqueParents.Add(parent);
+                }
+            }
+        }
+
+        // Adiciona 1 para considerar o ponto de término do elemento anterior e o início do elemento atual
+        /*if (elementIndex > 0)
+        {
+            totalWidth += 1;
+        }*/
+
+        return totalWidth;
     }
 
 }

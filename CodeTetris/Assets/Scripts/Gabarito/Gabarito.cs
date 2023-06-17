@@ -13,6 +13,7 @@ public class Gabarito : MonoBehaviour
 {
     public LinhaGabarito[] linhas;
 
+    public int indexLinhaMatriz;
     public int indexLinhaAtual;
     public string tituloFase;
 
@@ -29,7 +30,7 @@ public class Gabarito : MonoBehaviour
     gameManagerGrade gGameManagerGrade;
     Vida gVida;
 
-    List<ElementoMatriz[]> matriz; // Declaração da matriz como uma variável de membro da classe
+    public List<ElementoMatriz[]> matriz; // Declaração da matriz como uma variável de membro da classe
 
     AudioManager gAudioManager;
 
@@ -70,7 +71,7 @@ public class Gabarito : MonoBehaviour
             for (int i = 0; i < linha.elementos.Length; i++)
             {
                 cloneID++;
-                string nomeBloco = linha.elementos[i].gameObject.name + "(clone)" + cloneID;
+                string nomeBloco = linha.elementos[i].gameObject.name + "(Clone)" + cloneID;
                 bool spawnDisponivel = linhaIndex == 0 && i == 0; // Apenas o primeiro elemento da primeira linha é true
                 bool foiUtilizado = false;
                 int largura = linha.elementos[i].gameObject.GetComponent<ConstroiBloco>().largura;
@@ -103,7 +104,7 @@ public class Gabarito : MonoBehaviour
             ElementoMatriz elementoEscolhido = elementosDisponiveis[randomIndex];
 
             // Passar o elemento escolhido para o método CriarPeca
-            linhas[elementoEscolhido.indexLinha].CriarPeca(elementoEscolhido.valor);
+            linhas[elementoEscolhido.indexLinha].CriarPeca(elementoEscolhido.valor, elementoEscolhido.nome);
 
             // Chamar um novo método para atualizar a matriz, desativando o elemento escolhido
             AtualizarMatriz(matriz, elementoEscolhido, elementoEscolhido.indexLinha);
@@ -162,7 +163,7 @@ public class Gabarito : MonoBehaviour
         {
             //TODO um jeito de acessar todos os elementos da linha que estão com foiUtilizado == true calculando a soma da largura deles e comparando cm o item da largura atual se der maior que da linha anterior nao pode
             // verifica se a peca seguinte nao cobre a anterior e se a linha atual é maior que a anterior
-            if (CompararLarguras(indexLinha, matriz[indexLinha][indexProximaPeca].largura))
+            if (CompararLarguras(indexLinha, matriz[indexLinha][indexProximaPeca].largura) && !matriz[indexLinha][indexProximaPeca].foiUtilizado)
             {
                 // Liber a peca seguinte
                 matriz[indexLinha][indexProximaPeca].spawnDisponivel = true;
@@ -209,9 +210,10 @@ public class Gabarito : MonoBehaviour
                 // verifica se a quantidade de elementos na linha atual é maior do que a linha anterior (Impendindo bloqueio de peças)
                 if (elemento.valor + 1 <= matriz[indexLinha].Length - 1)
                 {
-                    int indexElementoLinhaAnterior = Array.FindLastIndex(matriz[primeiraLinhaDisponivel], e => e.spawnDisponivel);
+                    //int indexElementoLinhaAnterior = Array.FindLastIndex(matriz[primeiraLinhaDisponivel], e => e.spawnDisponivel);
 
                     // verifica se a peca seguinte nao cobre a anterior
+                    //TODO fazer outro if, caso a linha nao tenha nenhum spawn disponivel pegar o primeiro elemento OU pegar a partir do elemento que tem spawn disponivel
                     if (CompararLarguras(indexLinha, matriz[indexLinha][elemento.valor + 1].largura))
                     {
                         // Liber a peca seguinte
@@ -320,14 +322,18 @@ public class Gabarito : MonoBehaviour
 
             //TODO criar metodo para deletar linhas logicas, definindo todas elas como não utilizado e definir o primeiro
             //elemento da linha que errou como spawnDisponivel
-            int indexLinhaMatriz = matriz.FindIndex(linha => linha.Any(e => e.nome == elemento.name));
-            //limparLinhasLogicas(indexLinhaMatriz);
 
-            int indexPrimeiraLinhaVisualExcluivel = 18 - (indexLinhaMatriz * 2);
-            for (int i = indexLinhaMatriz; i > 0; i--)
+            //TODO quando limpa uma linha deve diminuir o indice do indexLinhaMatriz
+            indexLinhaMatriz = matriz.FindIndex(linha => linha.Any(e => e.nome == elemento.name));
+            int indexElemento = Array.FindIndex(matriz[indexLinhaMatriz], e => e.nome == elemento.name);
+
+            int indexLinhaFisica = (18 - (int)elemento.position.y) / 2;
+            limparLinhasLogicas(indexLinhaFisica, indexLinhaMatriz, indexElemento);
+
+            /*for (int i = ((int)elemento.position.y) ; i > 0; i--)
             {
                 gGameManagerGrade.deletaLinhasErradas(i);
-            }
+            }*/
             return;
         }
         else
@@ -337,6 +343,122 @@ public class Gabarito : MonoBehaviour
 
         // Faça o que for necessário com as informações comparativas
         // ...
+    }
+
+    //indexLinhaFisica é de onde ele errou
+    public void limparLinhasLogicas(int indexLinhaFisica, int indexLinhaMatriz, int indexElemento)
+    {
+        matriz[indexLinhaMatriz][indexElemento].foiUtilizado = false;
+        //int indexUltimoQueFoiUtilizado = Array.FindLastIndex(matriz[indexLinhaMatriz], e => e.foiUtilizado);
+
+        if (indexLinhaFisica == indexLinhaMatriz)
+        {
+            for (int i = indexLinhaFisica; i < matriz.Count; i++)
+            {
+                Array.ForEach(matriz[i], elemento =>
+                {
+                    elemento.foiUtilizado = false;
+                    elemento.spawnDisponivel = false;
+                });
+            }
+
+            matriz[indexLinhaFisica][0].spawnDisponivel = true;
+            excluirLinhas(indexLinhaFisica);
+        }
+        else
+        {
+            for (int i = indexLinhaMatriz; i < matriz.Count; i++)
+            {
+                for (int j = 0; j < matriz[i].Length; j++)
+                {
+
+                    matriz[i][j].foiUtilizado = false;
+                    matriz[i][j].spawnDisponivel = false;
+
+                    //Apenas para os elementos que não foram utilizados
+                    /*if (!matriz[i][j].foiUtilizado)
+                    {*/
+                    //Se for o mesmo index da linha, marcar apartir do index do elemento
+                    /*if (i == indexLinhaMatriz && j >= indexElemento)
+                    {
+                        matriz[i][j].foiUtilizado = false;
+                        matriz[i][j].spawnDisponivel = false;
+                    }
+                    else if (i > indexLinhaMatriz)
+                    {
+                        matriz[i][j].foiUtilizado = false;
+                        matriz[i][j].spawnDisponivel = false;
+                    }*/
+                    //}
+                }
+            }
+
+            matriz[indexLinhaMatriz][indexElemento].spawnDisponivel = true;
+
+            //matriz[indexLinhaMatriz][indexElemento].spawnDisponivel = true;
+            if (matriz[indexLinhaMatriz][indexElemento - 1] != null)
+            {
+                //Não é o primeiro da linha e define o elemento anterior como elementoEscolhido, para definir o spawnDisponivel dos proximos
+                AtualizarMatriz(matriz, matriz[indexLinhaMatriz][indexElemento - 1], matriz[indexLinhaMatriz][indexElemento - 1].indexLinha);
+            }
+            else
+            {
+                // É o primeiro elemento da linha
+                AtualizarMatriz(matriz, matriz[indexLinhaMatriz][0], matriz[indexLinhaMatriz][0].indexLinha);
+            }
+            int index = (18 - (indexLinhaMatriz * 2));
+            excluirLinhas(index);
+        }
+
+
+        /*int altura = (18 - (indexLinhaMatriz * 2));
+
+        for (int y = altura; y > 0; y--)
+        {
+            for (int x = 0; x < gameManagerGrade.largura; x++)
+            {
+                *//* string nome = gameManagerGrade.grade[x, y].transform.parent.gameObject.name;
+                 int indexConvertidoLinha = matriz.FindIndex(linha => linha.Any(e => e.nome == nome));
+                 int indexConvertidoElemento = Array.FindIndex(matriz[indexConvertidoLinha], e => e.nome == nome);*//*
+
+                int IndexPodeExcluir = gGameManagerGrade.CountUniqueParentObjectsInLine(y, indexUltimoQueFoiUtilizado);
+                if (y == altura && x >= IndexPodeExcluir) // && x >= indexElemento
+                {
+                    if (gameManagerGrade.grade[x, y] != null)
+                    {
+                        Destroy(gameManagerGrade.grade[x, y].transform.parent.gameObject);
+                        gameManagerGrade.grade[x, y] = null;
+                    }
+                    if (gameManagerGrade.grade[x, (y + 1)] != null)
+                    {
+                        Destroy(gameManagerGrade.grade[x, (y + 1)].transform.parent.gameObject);
+                        gameManagerGrade.grade[x, (y + 1)] = null;
+                    }
+                }
+                else if (y > altura)
+                {
+                    if (gameManagerGrade.grade[x, y] != null)
+                    {
+                        Destroy(gameManagerGrade.grade[x, y].transform.parent.gameObject);
+                        gameManagerGrade.grade[x, y] = null;
+                    }
+                    if (gameManagerGrade.grade[x, (y + 1)] != null)
+                    {
+                        Destroy(gameManagerGrade.grade[x, (y + 1)].transform.parent.gameObject);
+                        gameManagerGrade.grade[x, (y + 1)] = null;
+                    }
+                }
+                
+            }
+        }*/
+    }
+
+    public void excluirLinhas(int indexLinha)
+    {
+        for (int i = indexLinha; i > 0; i--)
+        {
+            gGameManagerGrade.deletaLinhasErradas(i);
+        }
     }
 
     public void LimparGabaritoComparativo()
