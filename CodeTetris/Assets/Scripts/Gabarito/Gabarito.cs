@@ -8,12 +8,14 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
+using System.Reflection;
 
 public class Gabarito : MonoBehaviour
 {
     public LinhaGabarito[] linhas;
 
     public int indexLinhaMatriz;
+    public int subtraiMatrizLogica;
     public int indexLinhaAtual;
     public string tituloFase;
 
@@ -44,7 +46,7 @@ public class Gabarito : MonoBehaviour
         gAudioManager = GameObject.FindObjectOfType<AudioManager>();
         
         AtualizarTituloPagina();
-
+        subtraiMatrizLogica = 0;
         indexLinhaAtual = 0;
         matriz = MontarMatriz();
         gerarBlocoLinha();
@@ -111,16 +113,20 @@ public class Gabarito : MonoBehaviour
         }
         else
         {
-            // Não há elementos disponíveis na lista, logo todos os blocos do gabarito já foram
-            Debug.LogError("Não há elementos disponíveis para criar a peça!");
-            Debug.LogError("Todas as linhas da matriz já foram percorridas!");
-            // Definindo o valor do índice
-            if (gMoveParaProximaFase.nextSceneLoad > PlayerPrefs.GetInt("levelAt"))
-            {
-                PlayerPrefs.SetInt("levelAt", gMoveParaProximaFase.nextSceneLoad);
-            }
-            gGameController.ShowPanel(gGameController.winPanel);
-            gAudioManager.PlaySFX(gAudioManager.vitoriaSound);
+            bool todosElementosUtilizados = matriz.All(linha => linha.All(e => e.foiUtilizado));
+            /*if (todosElementosUtilizados)
+            {*/
+                // Não há elementos disponíveis na lista, logo todos os blocos do gabarito já foram
+                Debug.LogError("Não há elementos disponíveis para criar a peça!");
+                Debug.LogError("Todas as linhas da matriz já foram percorridas!");
+                // Definindo o valor do índice
+                if (gMoveParaProximaFase.nextSceneLoad > PlayerPrefs.GetInt("levelAt"))
+                {
+                    PlayerPrefs.SetInt("levelAt", gMoveParaProximaFase.nextSceneLoad);
+                }
+                gGameController.ShowPanel(gGameController.winPanel);
+                gAudioManager.PlaySFX(gAudioManager.vitoriaSound);
+            //}
         }
     }
 
@@ -226,6 +232,19 @@ public class Gabarito : MonoBehaviour
         }
     }
 
+    public void AtualizaMatrizLogicaAposExcluir(int index)
+    {
+        /*for (int linhaIndex = 0; linhaIndex < matriz.Count; linhaIndex++)
+        {
+            ElementoMatriz[] linha = matriz[linhaIndex];
+
+            for (int elementoIndex = 0; elementoIndex < linha.Length; elementoIndex++)
+            {
+                linha[elementoIndex].indexLinha = linhaIndex - 1;
+            }
+        }*/
+    }
+
         public void AtualizarCoordenadasY()
     {
         Dictionary<string, HashSet<Vector2>> novoHashComparativo = new Dictionary<string, HashSet<Vector2>>();
@@ -312,28 +331,17 @@ public class Gabarito : MonoBehaviour
                 gAudioManager.PlaySFX(gAudioManager.derrotaSound);
 
             }
-            
-
-            //TODO deve deletar, mas voltar ele para a lista de blocos que serão spawnados
-
             //TODO SE a linha estiver cheia, mas for o bloco errado não deve limpar!!!!
             // Apagar as linhas abaixo da linha atual
             gAudioManager.PlaySFX(gAudioManager.erradoSound);
 
-            //TODO criar metodo para deletar linhas logicas, definindo todas elas como não utilizado e definir o primeiro
-            //elemento da linha que errou como spawnDisponivel
-
             //TODO quando limpa uma linha deve diminuir o indice do indexLinhaMatriz
-            indexLinhaMatriz = matriz.FindIndex(linha => linha.Any(e => e.nome == elemento.name));
-            int indexElemento = Array.FindIndex(matriz[indexLinhaMatriz], e => e.nome == elemento.name);
-
+            int indexLinhaMatrizLogica = matriz.FindIndex(linha => linha.Any(e => e.nome == elemento.name));
+            /*int indexElemento = Array.FindIndex(matriz[indexLinhaMatriz], e => e.nome == elemento.name);
+            int teste = matriz[indexLinhaMatrizLogica][indexElemento].indexLinha;*/
             int indexLinhaFisica = (18 - (int)elemento.position.y) / 2;
-            limparLinhasLogicas(indexLinhaFisica, indexLinhaMatriz, indexElemento);
 
-            /*for (int i = ((int)elemento.position.y) ; i > 0; i--)
-            {
-                gGameManagerGrade.deletaLinhasErradas(i);
-            }*/
+            limparLinhasLogicas(indexLinhaFisica, indexLinhaMatrizLogica);
             return;
         }
         else
@@ -346,114 +354,38 @@ public class Gabarito : MonoBehaviour
     }
 
     //indexLinhaFisica é de onde ele errou
-    public void limparLinhasLogicas(int indexLinhaFisica, int indexLinhaMatriz, int indexElemento)
+    public void limparLinhasLogicas(int indexLinhaFisica, int indexLinhaMatriz)
     {
-        matriz[indexLinhaMatriz][indexElemento].foiUtilizado = false;
-        //int indexUltimoQueFoiUtilizado = Array.FindLastIndex(matriz[indexLinhaMatriz], e => e.foiUtilizado);
-
-        if (indexLinhaFisica == indexLinhaMatriz)
+        //Deixa todos da matriz logica como spawnDisponivel false
+        for (int i = indexLinhaMatriz; i < matriz.Count; i++)
         {
-            for (int i = indexLinhaFisica; i < matriz.Count; i++)
+            Array.ForEach(matriz[i], elemento =>
             {
-                Array.ForEach(matriz[i], elemento =>
-                {
-                    elemento.foiUtilizado = false;
-                    elemento.spawnDisponivel = false;
-                });
-            }
+                elemento.foiUtilizado = false;
+                elemento.spawnDisponivel = false;
+            });
+        }
 
-            matriz[indexLinhaFisica][0].spawnDisponivel = true;
-            excluirLinhas(indexLinhaFisica);
+        matriz[indexLinhaMatriz][0].spawnDisponivel = true;
+
+        int index = 18 - ((indexLinhaMatriz - subtraiMatrizLogica) * 2);
+        LimparLinhasFisicas(index);
+
+       /* int index;
+        index = 18 - (indexLinhaMatriz * 2) + 2 <= 18 ? 18 - (indexLinhaMatriz * 2) + 2 : 18;
+        if (indexLinhaFisica == 0)
+        {
+            LimparLinhasFisicas(index);
         }
         else
         {
-            for (int i = indexLinhaMatriz; i < matriz.Count; i++)
-            {
-                for (int j = 0; j < matriz[i].Length; j++)
-                {
-
-                    matriz[i][j].foiUtilizado = false;
-                    matriz[i][j].spawnDisponivel = false;
-
-                    //Apenas para os elementos que não foram utilizados
-                    /*if (!matriz[i][j].foiUtilizado)
-                    {*/
-                    //Se for o mesmo index da linha, marcar apartir do index do elemento
-                    /*if (i == indexLinhaMatriz && j >= indexElemento)
-                    {
-                        matriz[i][j].foiUtilizado = false;
-                        matriz[i][j].spawnDisponivel = false;
-                    }
-                    else if (i > indexLinhaMatriz)
-                    {
-                        matriz[i][j].foiUtilizado = false;
-                        matriz[i][j].spawnDisponivel = false;
-                    }*/
-                    //}
-                }
-            }
-
-            matriz[indexLinhaMatriz][indexElemento].spawnDisponivel = true;
-
-            //matriz[indexLinhaMatriz][indexElemento].spawnDisponivel = true;
-            if (matriz[indexLinhaMatriz][indexElemento - 1] != null)
-            {
-                //Não é o primeiro da linha e define o elemento anterior como elementoEscolhido, para definir o spawnDisponivel dos proximos
-                AtualizarMatriz(matriz, matriz[indexLinhaMatriz][indexElemento - 1], matriz[indexLinhaMatriz][indexElemento - 1].indexLinha);
-            }
-            else
-            {
-                // É o primeiro elemento da linha
-                AtualizarMatriz(matriz, matriz[indexLinhaMatriz][0], matriz[indexLinhaMatriz][0].indexLinha);
-            }
-            int index = (18 - (indexLinhaMatriz * 2));
-            excluirLinhas(index);
-        }
-
-
-        /*int altura = (18 - (indexLinhaMatriz * 2));
-
-        for (int y = altura; y > 0; y--)
-        {
-            for (int x = 0; x < gameManagerGrade.largura; x++)
-            {
-                *//* string nome = gameManagerGrade.grade[x, y].transform.parent.gameObject.name;
-                 int indexConvertidoLinha = matriz.FindIndex(linha => linha.Any(e => e.nome == nome));
-                 int indexConvertidoElemento = Array.FindIndex(matriz[indexConvertidoLinha], e => e.nome == nome);*//*
-
-                int IndexPodeExcluir = gGameManagerGrade.CountUniqueParentObjectsInLine(y, indexUltimoQueFoiUtilizado);
-                if (y == altura && x >= IndexPodeExcluir) // && x >= indexElemento
-                {
-                    if (gameManagerGrade.grade[x, y] != null)
-                    {
-                        Destroy(gameManagerGrade.grade[x, y].transform.parent.gameObject);
-                        gameManagerGrade.grade[x, y] = null;
-                    }
-                    if (gameManagerGrade.grade[x, (y + 1)] != null)
-                    {
-                        Destroy(gameManagerGrade.grade[x, (y + 1)].transform.parent.gameObject);
-                        gameManagerGrade.grade[x, (y + 1)] = null;
-                    }
-                }
-                else if (y > altura)
-                {
-                    if (gameManagerGrade.grade[x, y] != null)
-                    {
-                        Destroy(gameManagerGrade.grade[x, y].transform.parent.gameObject);
-                        gameManagerGrade.grade[x, y] = null;
-                    }
-                    if (gameManagerGrade.grade[x, (y + 1)] != null)
-                    {
-                        Destroy(gameManagerGrade.grade[x, (y + 1)].transform.parent.gameObject);
-                        gameManagerGrade.grade[x, (y + 1)] = null;
-                    }
-                }
-                
-            }
+            LimparLinhasFisicas(18 - (indexLinhaMatriz * 2));
         }*/
-    }
 
-    public void excluirLinhas(int indexLinha)
+
+    }   
+
+    public void LimparLinhasFisicas(int indexLinha)
     {
         for (int i = indexLinha; i > 0; i--)
         {

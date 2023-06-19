@@ -108,7 +108,9 @@ public class gameManagerGrade : MonoBehaviour {
         }
         int index = (18 - y)/2;
 
+        gGabarito.AtualizaMatrizLogicaAposExcluir(index);
         gGabarito.indexLinhaMatriz--;
+        gGabarito.subtraiMatrizLogica++;
         gGabarito.AtualizarCoordenadasY();
         gQuadroResultado.AtivarFilhoPorIndex(index);
         gAudioManager.PlaySFX(gAudioManager.limpaLinhaSound);

@@ -1977,7 +1977,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   message: "O programa verifica se o n\xFAmero \xE9 positivo, negativo ou igual a
     zero e exibe a respectiva mensagem"
-  tooltipPivot: {x: 0.5, y: 1}
+  tooltipPivot: {x: 0.5, y: 1.07}
 --- !u!61 &590576339
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1988,7 +1988,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.36791992, y: 2.6037292}
@@ -2077,7 +2077,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.36791992, y: 2.6037292}
@@ -2107,7 +2107,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   message: "O jogador deve executar o programa, que ir\xE1 exibir a mensagem \"Ol\xE1
     Mundo!\" na tela."
-  tooltipPivot: {x: 0.5, y: 1}
+  tooltipPivot: {x: 0.5, y: 1.07}
 --- !u!224 &692046786 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1266896852483600848, guid: 8ab284b5214534699984acce51873626, type: 3}
