@@ -324,7 +324,7 @@ public class Gabarito : MonoBehaviour
             Debug.Log("Elemento NÃO tem coordenada correspondente");
 
             
-            gVida.health--;
+            //gVida.health--;
             if (gVida.health <= 0)
             {
                 gGameController.ShowPanel(gGameController.gameOverPanel);
@@ -356,20 +356,39 @@ public class Gabarito : MonoBehaviour
     //indexLinhaFisica é de onde ele errou
     public void limparLinhasLogicas(int indexLinhaFisica, int indexLinhaMatriz)
     {
-        //Deixa todos da matriz logica como spawnDisponivel false
-        for (int i = indexLinhaMatriz; i < matriz.Count; i++)
+        int index;
+        if (indexLinhaFisica < indexLinhaMatriz - subtraiMatrizLogica)
         {
-            Array.ForEach(matriz[i], elemento =>
+            for (int i = (indexLinhaMatriz - subtraiMatrizLogica); i < matriz.Count; i++)
             {
-                elemento.foiUtilizado = false;
-                elemento.spawnDisponivel = false;
-            });
+                Array.ForEach(matriz[i], elemento =>
+                {
+                    elemento.foiUtilizado = false;
+                    elemento.spawnDisponivel = false;
+                });
+            }
+
+            matriz[(indexLinhaMatriz - subtraiMatrizLogica)][0].spawnDisponivel = true;
+
+            index = 18 - ((indexLinhaFisica) * 2);
+            LimparLinhasFisicas(index);
         }
+        else
+        {
+            for (int i = indexLinhaMatriz; i < matriz.Count; i++)
+            {
+                Array.ForEach(matriz[i], elemento =>
+                {
+                    elemento.foiUtilizado = false;
+                    elemento.spawnDisponivel = false;
+                });
+            }
 
-        matriz[indexLinhaMatriz][0].spawnDisponivel = true;
+            matriz[indexLinhaMatriz][0].spawnDisponivel = true;
 
-        int index = 18 - ((indexLinhaMatriz - subtraiMatrizLogica) * 2);
-        LimparLinhasFisicas(index);
+            index = 18 - ((indexLinhaMatriz - subtraiMatrizLogica) * 2);
+            LimparLinhasFisicas(index);
+        }
 
        /* int index;
         index = 18 - (indexLinhaMatriz * 2) + 2 <= 18 ? 18 - (indexLinhaMatriz * 2) + 2 : 18;
