@@ -22,7 +22,7 @@ public class SeletorDeFase : MonoBehaviour
     public int numPaginas = 1;
 
     public GameObject loadingScreen;
-    public Image loadingBarFill;
+    public Slider loadingBarFill;
 
     [System.Serializable]
     public struct Pagina
@@ -111,12 +111,15 @@ public class SeletorDeFase : MonoBehaviour
     private IEnumerator LoadSceneAsync(int sceneId)
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneId);
+
         loadingScreen.SetActive(true);
 
         while (!operation.isDone)
         {
             float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
-            loadingBarFill.fillAmount = progressValue;
+
+            loadingBarFill.value = progressValue;
+
             yield return null;
         }
     }

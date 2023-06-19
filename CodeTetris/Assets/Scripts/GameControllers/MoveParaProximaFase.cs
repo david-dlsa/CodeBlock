@@ -8,7 +8,7 @@ public class MoveParaProximaFase : MonoBehaviour
 {
     public int nextSceneLoad;
     public GameObject loadingScreen;
-    public Image loadingBarFill;
+    public Slider loadingBarFill;
     private Gabarito gGabarito;
 
     private void Start()
@@ -43,10 +43,11 @@ public class MoveParaProximaFase : MonoBehaviour
         while (!operation.isDone)
         {
             float progressValue = Mathf.Clamp01(operation.progress / 0.9f);
-            loadingBarFill.fillAmount = progressValue;
+
+            loadingBarFill.value = progressValue;
+
             yield return null;
         }
 
-        
     }
 }

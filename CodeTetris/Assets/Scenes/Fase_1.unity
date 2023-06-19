@@ -1855,7 +1855,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8649528733168194738, guid: 977455f60ffab407d826c488d344d241, type: 3}
       propertyPath: m_text
-      value: Loading...
+      value: Carregando...
       objectReference: {fileID: 0}
     - target: {fileID: 8649528734008256456, guid: 977455f60ffab407d826c488d344d241, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1867,6 +1867,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 977455f60ffab407d826c488d344d241, type: 3}
+--- !u!114 &155735643 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8649528732368237309, guid: 977455f60ffab407d826c488d344d241, type: 3}
+  m_PrefabInstance: {fileID: 155735642}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &180842690
 GameObject:
   m_ObjectHideFlags: 0
@@ -4938,17 +4949,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &438348615 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8649528734008256463, guid: 977455f60ffab407d826c488d344d241, type: 3}
-  m_PrefabInstance: {fileID: 155735642}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &444591283
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9810,8 +9810,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cfe23ecd7d369f49892940dd7070ece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LoadingScreen: {fileID: 1831467920}
-  LoadingBarFill: {fileID: 438348615}
+  loadingScreen: {fileID: 0}
+  loadingBarFill: {fileID: 0}
 --- !u!4 &954376200
 Transform:
   m_ObjectHideFlags: 0
@@ -14929,7 +14929,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextSceneLoad: 0
   loadingScreen: {fileID: 1831467920}
-  loadingBarFill: {fileID: 438348615}
+  loadingBarFill: {fileID: 155735643}
 --- !u!114 &1337455617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18665,6 +18665,7 @@ MonoBehaviour:
   - {fileID: 8416489832405601568, guid: 6fd670cff37a7184595fc33110cf21c2, type: 3}
   - {fileID: 6946704031241280090, guid: c2530a215d181304bb30369c875f36d4, type: 3}
   indexLinhaMatriz: 0
+  subtraiMatrizLogica: 0
   indexLinhaAtual: 0
   tituloFase: "Fase 1: Ol\xE1 Mundo!"
 --- !u!4 &1766772080
