@@ -84,12 +84,21 @@ public class SeletorDeFase : MonoBehaviour
     {
         Image image = button.GetComponent<Image>();
 
+        // Desativa o objeto filho "Icon_ImageIcon_Info" do botão
+        Transform iconTransform = button.transform.Find("Icon_ImageIcon_Info");
+        if (iconTransform != null)
+        {
+            iconTransform.gameObject.SetActive(false);
+        }
+
         if (interactable)
         {
+            iconTransform.gameObject.SetActive(true);
             image.sprite = spriteA; // Sprite quando o botão for interativo (true)
         }
         else
         {
+            iconTransform.gameObject.SetActive(false);
             image.sprite = spriteB; // Sprite quando o botão não for interativo (false)
         }
     }

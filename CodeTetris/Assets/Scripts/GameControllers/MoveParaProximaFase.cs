@@ -19,7 +19,7 @@ public class MoveParaProximaFase : MonoBehaviour
 
     public void proximaCena()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 3)
+        if (SceneManager.GetActiveScene().buildIndex == 4)
         {
             Debug.LogError("VOCÊ GANHOU!!!");
         }
