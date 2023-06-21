@@ -38,6 +38,7 @@ public class gameController : MonoBehaviour
         panel.SetActive(true);
     }
 
+
     public void ClosePanel(GameObject panel)
     {
         if (gManagerGrade != null)

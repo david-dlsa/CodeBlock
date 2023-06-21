@@ -7,6 +7,9 @@ public class LoadingScene : MonoBehaviour
 {
     public GameObject loadingScreen;
     public Slider loadingBarFill;
+/*
+    public Image black;
+    public Animator anim;*/
 
     public void LoadScene(int sceneId)
     {
@@ -28,4 +31,11 @@ public class LoadingScene : MonoBehaviour
             yield return null;
         }
     }
+
+   /* IEnumerator Fading()
+    {
+        anim.SetBool("Fade", true);
+        yield return new WaitUntil(() => black.color.a == 1);
+        SceneManager.LoadScene(0);
+    }*/
 }

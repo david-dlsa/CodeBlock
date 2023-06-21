@@ -44,7 +44,8 @@ public class Gabarito : MonoBehaviour
         gGameManagerGrade = GameObject.FindObjectOfType<gameManagerGrade>();
         gVida = GetComponent<Vida>();
         gAudioManager = GameObject.FindObjectOfType<AudioManager>();
-        
+
+        gGameManagerGrade.pausarJogo();
         AtualizarTituloPagina();
         subtraiMatrizLogica = 0;
         indexLinhaAtual = 0;
@@ -324,7 +325,7 @@ public class Gabarito : MonoBehaviour
             Debug.Log("Elemento NÃO tem coordenada correspondente");
 
             
-            //gVida.health--;
+            gVida.health--;
             if (gVida.health <= 0)
             {
                 gGameController.ShowPanel(gGameController.gameOverPanel);
