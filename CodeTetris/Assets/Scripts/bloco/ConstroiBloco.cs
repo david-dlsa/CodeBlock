@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using BarthaSzabolcs.Tutorial_SpriteFlash;
 
 public class ConstroiBloco : MonoBehaviour
 {
@@ -15,8 +16,11 @@ public class ConstroiBloco : MonoBehaviour
     private string nomeDoObjeto = "partCode";
     private string tagDoObjeto = "partCode";
 
+
+    Gabarito gGabarito;
     void Start()
     {
+        gGabarito = GameObject.FindObjectOfType<Gabarito>();
         ConstruirBloco();
     }
 
@@ -24,6 +28,7 @@ public class ConstroiBloco : MonoBehaviour
     {
         // Adiciona o componente AudioSource ao objeto
         AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+       // ColoredFlash coloredFlash = gameObject.AddComponent<ColoredFlash>();
 
         // Configura o componente AudioSource
         audioSource.playOnAwake = false;
@@ -44,6 +49,12 @@ public class ConstroiBloco : MonoBehaviour
 
                 // Configura o componente AudioSource do quadrado
                 quadradoAudioSource.playOnAwake = false;
+
+                // Adiciona o componente ColoredFlash ao objeto quadrado
+                ColoredFlash quadradocoloredFlash = quadrado.AddComponent<ColoredFlash>();
+
+                // Configura o componente ColoredFlash do quadrado
+                quadradocoloredFlash.flashMaterial = gGabarito.flashMaterial;
             }
         }
 

@@ -6,18 +6,48 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu_Principal.unity
+    path: Assets/Scenes/Menus/Menu_Principal.unity
     guid: 07928cb409e280940b9dc133ee04331d
   - enabled: 1
-    path: Assets/Scenes/Fases_Menu.unity
+    path: Assets/Scenes/Menus/Fases_Menu.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Fase_Tutorial_1.unity
+    path: Assets/Scenes/Fases/Tutotial/Fase_Tutorial_1.unity
     guid: 1520e00496840fd4489df1e77f2e29ed
   - enabled: 1
+    path: Assets/Scenes/Fases/Tutotial/Fase_Tutorial_2.unity
+    guid: a40b5425eef97a54aae8b0a208e9f866
+  - enabled: 1
+    path: Assets/Scenes/Fases/Tutotial/Fase_Tutorial_3.unity
+    guid: 30866e447b9ae254fa86813f3ae1b2e8
+  - enabled: 1
+    path: Assets/Scenes/Fases/Tutotial/Fase_Tutorial_4.unity
+    guid: b195f8744f9865d4f93723efdef09f03
+  - enabled: 1
+    path: Assets/Scenes/Fases/Tutotial/Fase_Tutorial_5.unity
+    guid: a68e2548f93106e48a6b52c1a5e5281d
+  - enabled: 1
+    path: Assets/Scenes/Fases/Tutotial/Fase_Tutorial_6.unity
+    guid: 9b0c1772232c47c41a27c4abda5af5ca
+  - enabled: 1
+    path: "Assets/Scenes/Fases/Entrada e Sa\xEDda/Entrada_Saida_1 .unity"
+    guid: 922a49087b578bc4287a59f5eca011f0
+  - enabled: 1
+    path: "Assets/Scenes/Fases/Entrada e Sa\xEDda/Entrada_Saida_2.unity"
+    guid: a147a7af099467845ac92f8193307816
+  - enabled: 1
+    path: "Assets/Scenes/Fases/Entrada e Sa\xEDda/Entrada_Saida_3.unity"
+    guid: 14a6de94865d6d246a32bb27284995d9
+  - enabled: 1
+    path: "Assets/Scenes/Fases/Entrada e Sa\xEDda/Entrada_Saida_4.unity"
+    guid: 24f75f6d3c7ebd74fb5478c5e25a326a
+  - enabled: 1
+    path: "Assets/Scenes/Fases/Entrada e Sa\xEDda/Entrada_Saida_5.unity"
+    guid: 15ff1127aa667654cbdcef1a9d478183
+  - enabled: 0
     path: Assets/Scenes/Fase_1.unity
     guid: 5bbdbae00538a824784fe63e414d583d
-  - enabled: 1
-    path: Assets/Scenes/Fase_2.unity
+  - enabled: 0
+    path: Assets/Scenes/Fases/Fase_2.unity
     guid: d8b2f25e69813294bb6d63083ee2547e
   m_configObjects: {}

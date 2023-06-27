@@ -68,6 +68,3 @@ MonoBehaviour:
   x: 10
   y: 18
   tamanhoMaximo: 8
-  conectadoSound: {fileID: 0}
-  erradoSound: {fileID: 0}
-  limpaLinhaSound: {fileID: 0}

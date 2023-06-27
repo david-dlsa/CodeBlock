@@ -72,8 +72,8 @@ public class SeletorDeFase : MonoBehaviour
 
         // Carregar os valores salvos do PlayerPrefs
         fasesConcluidas = PlayerPrefs.GetInt("FasesConcluidas", fasesConcluidas);
-        currentPageIndex = PlayerPrefs.GetInt("PageIndex", currentPageIndex);
-        fasesPorPagina = PlayerPrefs.GetInt("FasesPorPagina", fasesPorPagina);
+        //currentPageIndex = PlayerPrefs.GetInt("PageIndex", currentPageIndex);
+        //fasesPorPagina = PlayerPrefs.GetInt("FasesPorPagina", fasesPorPagina);
 
         // Atualiza o título com base no índice da página atual
         AtualizarTituloPagina();
@@ -127,7 +127,7 @@ public class SeletorDeFase : MonoBehaviour
     public void AvancaPaginaMenu()
     {
         // Verifica se todas as fases do objeto atual foram concluídas
-        if (fasesConcluidas >= fasesPorPagina)
+        if (PlayerPrefs.GetInt("FasesConcluidas") >= fasesPorPagina)
         {
             // Encontra o objeto com a tag "scrollFases"
             GameObject objetoScroll = GameObject.FindWithTag("scrollFases");
@@ -237,14 +237,23 @@ public class SeletorDeFase : MonoBehaviour
             // Ativa o botão de voltar página
             voltaPaginaButton.gameObject.SetActive(true);
         }
+        if (PlayerPrefs.GetInt("FasesConcluidas") >= fasesPorPagina)
+        {
+            avancaPaginaButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            avancaPaginaButton.gameObject.SetActive(false);
+        }
+
     }
 
     // Atualiza as informações salvas no PlayerPrefs ao fechar o jogo
     private void OnApplicationQuit()
     {
         PlayerPrefs.SetInt("FasesConcluidas", fasesConcluidas);
-        PlayerPrefs.SetInt("PageIndex", currentPageIndex);
-        PlayerPrefs.SetInt("FasesPorPagina", fasesPorPagina);
+       // PlayerPrefs.SetInt("PageIndex", currentPageIndex);
+        //PlayerPrefs.SetInt("FasesPorPagina", fasesPorPagina);
         PlayerPrefs.Save();
     }
 }

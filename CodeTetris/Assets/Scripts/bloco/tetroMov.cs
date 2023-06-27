@@ -158,7 +158,7 @@ public class tetroMov : MonoBehaviour
                     gManagerGrade.score += 10;
                     enabled = false;
                     gGabarito.gabaritoComparativo(this.transform); //verifica se o bloco esta na posiçao correta
-                    gGabarito.gerarBlocoLinha();
+                        gGabarito.gerarBlocoLinha();
                     //gAudioManager.PlaySFX(gAudioManager.conectadoSound);
                     }
                 }

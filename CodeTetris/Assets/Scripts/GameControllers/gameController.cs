@@ -65,4 +65,17 @@ public class gameController : MonoBehaviour
         }
         SceneManager.LoadScene(index);
     }
+    public void DelayedAction(float delay, System.Action action)
+    {
+        StartCoroutine(DelayedCoroutine(delay, action));
+    }
+
+    private IEnumerator DelayedCoroutine(float delay, System.Action action)
+    {
+        yield return new WaitForSeconds(delay);
+
+        action.Invoke();
+    }
+
+
 }

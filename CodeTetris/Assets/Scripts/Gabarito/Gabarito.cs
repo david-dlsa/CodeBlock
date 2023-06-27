@@ -4,11 +4,11 @@ using System.Linq;
 using System.Xml.Linq;
 using TMPro;
 using UnityEditor;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.SceneManagement;
 using System.Reflection;
+using BarthaSzabolcs.Tutorial_SpriteFlash;
 
 public class Gabarito : MonoBehaviour
 {
@@ -18,6 +18,8 @@ public class Gabarito : MonoBehaviour
     public int subtraiMatrizLogica;
     public int indexLinhaAtual;
     public string tituloFase;
+    public Material flashMaterial;
+    public ParticleSystem ExplosionParticles;
 
     private List<Transform> blocosRemovidos = new List<Transform>();
 
@@ -31,6 +33,7 @@ public class Gabarito : MonoBehaviour
     gameController gGameController;
     gameManagerGrade gGameManagerGrade;
     Vida gVida;
+    ColoredFlash gColoredFlash;
 
     public List<ElementoMatriz[]> matriz; // Declaração da matriz como uma variável de membro da classe
 
@@ -44,6 +47,8 @@ public class Gabarito : MonoBehaviour
         gGameManagerGrade = GameObject.FindObjectOfType<gameManagerGrade>();
         gVida = GetComponent<Vida>();
         gAudioManager = GameObject.FindObjectOfType<AudioManager>();
+        gColoredFlash = GameObject.FindObjectOfType<ColoredFlash>();
+
 
         gGameManagerGrade.pausarJogo();
         AtualizarTituloPagina();
@@ -90,33 +95,36 @@ public class Gabarito : MonoBehaviour
     // Método para gerar os blocos com base na matriz
     public void gerarBlocoLinha()
     {
-        // Chamar o método ListaElementosDisponiveis e retorna a lista de elementos disponiveis 
-        List<ElementoMatriz> elementosDisponiveis = ListaElementosDisponiveis(matriz);
-
-        for (int i = 0; i < elementosDisponiveis.Count; i++)
+        gGameController.DelayedAction(0.2f, () =>
         {
-            Debug.LogError(i + " - Elemento: " + elementosDisponiveis[i].nome + ' ' + elementosDisponiveis[i].valor + ' ' + elementosDisponiveis[i].indexLinha);
-            Debug.LogError("======================================");
-        }
+            // Chamar o método ListaElementosDisponiveis e retorna a lista de elementos disponiveis 
+            List<ElementoMatriz> elementosDisponiveis = ListaElementosDisponiveis(matriz);
 
-        // Verificar se há elementos disponíveis na lista
-        if (elementosDisponiveis.Count > 0)
-        {
-            // Randomizar e pegar um elemento da lista elementosDisponiveis
-            int randomIndex = UnityEngine.Random.Range(0, elementosDisponiveis.Count);
-            ElementoMatriz elementoEscolhido = elementosDisponiveis[randomIndex];
+            for (int i = 0; i < elementosDisponiveis.Count; i++)
+            {
+                Debug.LogError(i + " - Elemento: " + elementosDisponiveis[i].nome + ' ' + elementosDisponiveis[i].valor + ' ' + elementosDisponiveis[i].indexLinha);
+                Debug.LogError("======================================");
+            }
 
-            // Passar o elemento escolhido para o método CriarPeca
-            linhas[elementoEscolhido.indexLinha].CriarPeca(elementoEscolhido.valor, elementoEscolhido.nome);
+            // Verificar se há elementos disponíveis na lista
+            if (elementosDisponiveis.Count > 0)
+            {
+                // Randomizar e pegar um elemento da lista elementosDisponiveis
+                int randomIndex = UnityEngine.Random.Range(0, elementosDisponiveis.Count);
+                ElementoMatriz elementoEscolhido = elementosDisponiveis[randomIndex];
 
-            // Chamar um novo método para atualizar a matriz, desativando o elemento escolhido
-            AtualizarMatriz(matriz, elementoEscolhido, elementoEscolhido.indexLinha);
-        }
-        else
-        {
-            bool todosElementosUtilizados = matriz.All(linha => linha.All(e => e.foiUtilizado));
-            /*if (todosElementosUtilizados)
-            {*/
+                // Passar o elemento escolhido para o método CriarPeca
+
+                linhas[elementoEscolhido.indexLinha].CriarPeca(elementoEscolhido.valor, elementoEscolhido.nome, transform);
+
+                // Chamar um novo método para atualizar a matriz, desativando o elemento escolhido
+                AtualizarMatriz(matriz, elementoEscolhido, elementoEscolhido.indexLinha);
+            }
+            else
+            {
+                bool todosElementosUtilizados = matriz.All(linha => linha.All(e => e.foiUtilizado));
+                /*if (todosElementosUtilizados)
+                {*/
                 // Não há elementos disponíveis na lista, logo todos os blocos do gabarito já foram
                 Debug.LogError("Não há elementos disponíveis para criar a peça!");
                 Debug.LogError("Todas as linhas da matriz já foram percorridas!");
@@ -125,10 +133,14 @@ public class Gabarito : MonoBehaviour
                 {
                     PlayerPrefs.SetInt("levelAt", gMoveParaProximaFase.nextSceneLoad);
                 }
-                gGameController.ShowPanel(gGameController.winPanel);
-                gAudioManager.PlaySFX(gAudioManager.vitoriaSound);
-            //}
-        }
+                gGameController.DelayedAction(0.3f, () =>
+                {
+                    gGameController.ShowPanel(gGameController.winPanel);
+                    gAudioManager.PlaySFX(gAudioManager.vitoriaSound);
+                });
+                //}
+            }
+        });
     }
 
     private int getLinhaDisponivel()
@@ -312,25 +324,38 @@ public class Gabarito : MonoBehaviour
         if (hashComparativo.ContainsKey(blocoElemento.texto))
         {
             HashSet<Vector2> coordenadas = hashComparativo[blocoElemento.texto];
-
+            ColoredFlash[] coloredFlashComponents = elemento.GetComponentsInChildren<ColoredFlash>();
             // Verifique se alguma das coordenadas do hash corresponde às coordenadas do elemento atual
             if (coordenadas.Contains(new Vector2(((elemento.position.x + blocoElemento.largura) - 1), elemento.position.y)))
             {
                 listaB.Add(elemento); // Adicionar o elemento atual à listaB
                 Debug.Log("Elemento TEM coordenada correspondente");
                 gAudioManager.PlaySFX(gAudioManager.conectadoSound);
+                //gColoredFlash.Flash(Color.yellow);
+                
+                foreach (ColoredFlash coloredFlash in coloredFlashComponents)
+                {
+                    coloredFlash.Flash(Color.yellow, flashMaterial);
+                }
                 return;
             }
 
             Debug.Log("Elemento NÃO tem coordenada correspondente");
+            //gColoredFlash.Flash(Color.red);
+            foreach (ColoredFlash coloredFlash in coloredFlashComponents)
+            {
+                coloredFlash.Flash(Color.red, flashMaterial);
+            }
 
-            
+
             gVida.health--;
             if (gVida.health <= 0)
             {
-                gGameController.ShowPanel(gGameController.gameOverPanel);
-                gAudioManager.PlaySFX(gAudioManager.derrotaSound);
-
+                gGameController.DelayedAction(0.3f, () =>
+                {
+                    gGameController.ShowPanel(gGameController.gameOverPanel);
+                    gAudioManager.PlaySFX(gAudioManager.derrotaSound);
+                });
             }
             //TODO SE a linha estiver cheia, mas for o bloco errado não deve limpar!!!!
             // Apagar as linhas abaixo da linha atual
@@ -342,7 +367,8 @@ public class Gabarito : MonoBehaviour
             int teste = matriz[indexLinhaMatrizLogica][indexElemento].indexLinha;*/
             int indexLinhaFisica = (18 - (int)elemento.position.y) / 2;
 
-            limparLinhasLogicas(indexLinhaFisica, indexLinhaMatrizLogica);
+            gGameController.DelayedAction(0.2f, () => limparLinhasLogicas(indexLinhaFisica, indexLinhaMatrizLogica));
+          
             return;
         }
         else

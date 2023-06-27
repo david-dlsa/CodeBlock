@@ -10,18 +10,23 @@ public class MoveParaProximaFase : MonoBehaviour
     public GameObject loadingScreen;
     public Slider loadingBarFill;
     private Gabarito gGabarito;
+    private SeletorDeFase gSeletorDeFase;
+    private gameController gGameController;
 
     private void Start()
     {
         nextSceneLoad = SceneManager.GetActiveScene().buildIndex + 1;
         gGabarito = GameObject.FindObjectOfType<Gabarito>();
+        gSeletorDeFase = GameObject.FindObjectOfType<SeletorDeFase>();
+        gGameController = GameObject.FindObjectOfType<gameController>();
     }
 
     public void proximaCena()
     {
-        if (SceneManager.GetActiveScene().buildIndex == 4)
+        if (SceneManager.GetActiveScene().buildIndex == 13)
         {
             Debug.LogError("VOCÊ GANHOU!!!");
+            gGameController.OpenScene(0);
         }
         else
         {
@@ -37,6 +42,7 @@ public class MoveParaProximaFase : MonoBehaviour
         // Definindo o valor do índice
         if (nextSceneLoad > PlayerPrefs.GetInt("levelAt"))
         {
+            PlayerPrefs.SetInt("FasesConcluidas", nextSceneLoad - 1);
             PlayerPrefs.SetInt("levelAt", nextSceneLoad);
         }
 

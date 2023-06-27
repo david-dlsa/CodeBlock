@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using BarthaSzabolcs.Tutorial_SpriteFlash;
 
 public class gameManagerGrade : MonoBehaviour {
 
@@ -19,12 +20,15 @@ public class gameManagerGrade : MonoBehaviour {
     QuadroResultado gQuadroResultado;
     Gabarito gGabarito;
     AudioManager gAudioManager;
-
+    ColoredFlash gColoredFlash;
+    gameController gGameController;
     void Start()
     {
         gQuadroResultado = GameObject.FindObjectOfType<QuadroResultado>();
         gGabarito = GameObject.FindObjectOfType<Gabarito>();
         gAudioManager = GameObject.FindObjectOfType<AudioManager>();
+        gColoredFlash = GameObject.FindObjectOfType<ColoredFlash>();
+        gGameController = GameObject.FindObjectOfType<gameController>();
     }
 
     void Update(){
@@ -42,22 +46,30 @@ public class gameManagerGrade : MonoBehaviour {
         return new Vector2(Mathf.Round(nA.x), Mathf.Round(nA.y));
     }
 
-    public void atualizaGrade(tetroMov pecaTetris){
-        for (int y=altura-1; y >= 0; y--){
-            for (int x=0; x < largura; x++){
-                if (grade [x,y] != null){
-                    if(grade[x,y].parent == pecaTetris.transform){
-                        grade[x,y] = null;
+    public void atualizaGrade(tetroMov pecaTetris)
+    {
+        for (int y = altura - 1; y >= 0; y--)
+        {
+            for (int x = 0; x < largura; x++)
+            {
+                if (grade[x, y] != null)
+                {
+                    if (grade[x, y].parent == pecaTetris.transform)
+                    {
+                        grade[x, y] = null;
                     }
                 }
             }
         }
-        
-        foreach (Transform peca in pecaTetris.transform){
+
+        foreach (Transform peca in pecaTetris.transform)
+        {
             //Não conta filho de pecaTetris que não esteja com a Tag pecaBloco
-            if(peca.CompareTag("pecaBloco")){
+            if (peca.CompareTag("pecaBloco"))
+            {
                 Vector2 posicao = arredonda(peca.position);
-                if(posicao.y >= 0){
+                if (posicao.y >= 0)
+                {
                     grade[(int)posicao.x, (int)posicao.y] = peca;
                 }
             }
@@ -100,7 +112,7 @@ public class gameManagerGrade : MonoBehaviour {
                 Destroy(grade[x, y].transform.parent.gameObject);
                 grade[x, y] = null;
             }
-            if (grade[x, (y+1)] != null)
+            if (grade[x, (y + 1)] != null)
             {
                 Destroy(grade[x, (y + 1)].transform.parent.gameObject);
                 grade[x, (y + 1)] = null;
@@ -108,6 +120,7 @@ public class gameManagerGrade : MonoBehaviour {
         }
         int index = (18 - y)/2;
 
+        gGabarito.ExplosionParticles.Play();
         gGabarito.AtualizaMatrizLogicaAposExcluir(index);
         gGabarito.indexLinhaMatriz--;
         gGabarito.subtraiMatrizLogica++;
@@ -121,6 +134,7 @@ public class gameManagerGrade : MonoBehaviour {
     {
         for (int x = 0; x < largura; x++)
         {
+
             if (grade[x, y] != null)
             {
                 //bloco = grade[x, y].transform.parent.gameObject.GetComponent<ConstroiBloco>();
